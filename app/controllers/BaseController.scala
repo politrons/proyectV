@@ -8,4 +8,8 @@ class BaseController extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
+  def search = Action {
+    Ok(views.html.search("Section to search media"))
+  }
+
 }
