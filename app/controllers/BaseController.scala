@@ -1,5 +1,6 @@
 package controllers
 
+import http.HttpClient._
 import play.api.mvc._
 
 class BaseController extends Controller {
@@ -9,7 +10,8 @@ class BaseController extends Controller {
   }
 
   def search = Action {
-    Ok(views.html.search("Section to search media"))
+    get("itunes.apple.com/search?term=jack+johnson", "https")
+    Ok(views.html.search(lastResponse.get[String]))
   }
 
 }
