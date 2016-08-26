@@ -11,7 +11,7 @@ class BaseController extends Controller {
 
   def search = Action {
     get("itunes.apple.com/search?term=jack+johnson", "https")
-    Ok(views.html.search(lastResponse.get[String]))
+    Ok(views.html.search(lastResponse.get))
   }
 
 }

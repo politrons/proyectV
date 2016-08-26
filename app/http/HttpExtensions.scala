@@ -22,10 +22,12 @@ trait HttpExtensions {
       request.header("content-type", "application/json")
     }
 
-    def asJson: Map[String, Any] = {
+    def asJson:JSONObject = {
       val response: HttpResponse[String] = request.asString
       if (response.isSuccess) {
-        JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
+        val map = JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
+        val jsonList= map.get("results").get.asInstanceOf[List[Map[String, Any]]]
+        new JSONObject(jsonList(0))
       }
       else
         throw new HttpResponseException(s"Error: $response")

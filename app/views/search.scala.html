@@ -1,4 +1,6 @@
-@(message: String)
+
+@import scala.util.parsing.json.JSONObject
+@(json: JSONObject)
 
 @main("Welcome to Project Video") {
 
@@ -10,7 +12,8 @@
         </head>
         <body>
            <h1>Search content section:</h1>
-            @message
+            <img src="@json.obj.get("artworkUrl100")">
+            @json
         </body>
     </html>
 
