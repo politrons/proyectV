@@ -1,11 +1,11 @@
 package http
 
-import scala.util.parsing.json.JSONObject
+import scala.util.parsing.json.JSONArray
 import scalaj.http.{Http, HttpOptions}
 
 object HttpClient extends HttpExtensions {
 
-  var lastResponse: Option[JSONObject] = None
+  var lastResponse: Option[JSONArray] = None
 
   def get(url: String, protocol: String = "http") {
     lastResponse = Some(
