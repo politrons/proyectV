@@ -2,7 +2,6 @@ package http
 
 import exceptions.HttpResponseException
 
-import scala.io.Source
 import scala.util.parsing.json._
 import scalaj.http.{HttpRequest, HttpResponse}
 
@@ -33,12 +32,6 @@ trait HttpExtensions {
         throw new HttpResponseException(s"Error: $response")
     }
 
-    private def mockItunes(): Unit ={
-            val source: String = Source.fromFile("app/resources/music.json").getLines.mkString
-            val map = JSON.parseFull(source).get.asInstanceOf[Map[String, Any]]
-            val jsonList= map.get("results").get.asInstanceOf[List[Map[String, Any]]]
-            new JSONArray(jsonList)
-    }
   }
 
 
