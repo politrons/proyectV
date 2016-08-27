@@ -1,74 +1,73 @@
 @import model.Album
 @(albums: List[Album])
 
-@main("Welcome to Project Video") {
+    @main("Welcome to Project Video") {
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-    <html>
-        <body>
-        @for((album, index) <- albums.zipWithIndex) {
-            <table>
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].artistName</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].collectionName</label>
-                    </td>
-                </tr>
-                @*<tr>*@
-                    @*<td>*@
-                        @*<label>@album.asInstanceOf[Album].get("trackName")</label>*@
-                    @*</td>*@
-                @*</tr>*@
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].primaryGenreName</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].country</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].trackPrice</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@album.asInstanceOf[Album].releaseDate</label>
-                    </td>
-                </tr>
-                @*<tr>*@
-                    @*<td>*@
-                        @*<label></label>*@
+        <html>
+            <body>
+            @for((album, index) <- albums.zipWithIndex) {
+                <table>
+                    <tr>
+                        <td>
+                            <img src='@album.asInstanceOf[Album].artWorkUrl'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Artis:@album.asInstanceOf[Album].artistName</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Album:@album.asInstanceOf[Album].collectionName</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table>
+                                <label>Songs:</label>
+                                @for((song, index) <- album.asInstanceOf[Album].songs.zipWithIndex) {
+                                    <tr>
+                                        <td>
+                                        @song.trackName
+                                        </td>
+                                        <td>
+                                            <audio controls preload="none" style="width:480px ;">
+                                                <source src='@song.previewUrl' type="audio/mp4" />
+                                            </audio>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Genre:@album.asInstanceOf[Album].primaryGenreName</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Country:@album.asInstanceOf[Album].country</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Price:@album.asInstanceOf[Album].trackPrice</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Release date:@album.asInstanceOf[Album].releaseDate</label>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                }
+            </body>
+        </html>
 
 
-                        @*<audio controls preload="none" style="width:480px;">*@
-                            @*<source src='@album.asInstanceOf[Album].get("previewUrl")' type="audio/mp4" />*@
-                        @*</audio>*@
-                    @*</td>*@
-                @*</tr>*@
-
-
-
-                @*<tr>*@
-                    @*<td>*@
-                        @*<img src='@album.asInstanceOf[Album].get("artworkUrl100")'>*@
-                    @*</td>*@
-                @*</tr>*@
-            </table>
-
-        }
-
-
-        </body>
-    </html>
-
-
-}
+    }

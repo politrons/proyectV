@@ -10,18 +10,14 @@ class Album(val artistName: String,
             val trackPrice: String,
             val releaseDate: String,
             val trackName: String,
-            val previewUrl: String
+            val previewUrl: String,
+            val artWorkUrl: String
            ) {
 
-  var trackNames: List[String] = List(trackName)
-  var previewUrls: List[String] = List(previewUrl)
+  var songs: List[Song] = List(new Song(trackName, previewUrl))
 
-  def addTrack(name: String) {
-    trackNames = trackNames.::(name)
-  }
-
-  def addPreviewUrl(url: String) {
-    previewUrls = previewUrls.::(url)
+  def addSongs(song: Song) {
+    songs = songs.::(song)
   }
 
 }

@@ -20,7 +20,8 @@ object AlbumFactory {
       json.obj.get("trackPrice").asString,
       json.obj.get("releaseDate").asString,
       json.obj.get("trackName").asString,
-      json.obj.get("previewUrl").asString
+      json.obj.get("previewUrl").asString,
+      json.obj.get("artworkUrl100").asString
     )
   }
 

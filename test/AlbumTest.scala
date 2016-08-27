@@ -13,7 +13,7 @@ class AlbumTest {
     val album = AlbumFactory.create(jsonArray.firstJson)
     val mergedAlbums = Discography.mergeAlbum(album, albums)
     assert(mergedAlbums)
-    assert(albums.head.trackNames.size == 16)
+    assert(albums.head.songs.size == 16)
 
 
   }

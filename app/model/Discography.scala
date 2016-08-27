@@ -33,22 +33,17 @@ object Discography {
 
   def mergeAlbum(newAlbum: Album, albums: List[Album]): Boolean = {
     var found = false
-    albums foreach (album => {
-      if (album.collectionName.equals(newAlbum.collectionName)) {
+    albums.toStream
+      .filter(album => isSameAlbum(newAlbum, album))
+      .foreach(album => {
         found = true
-        album.addTrack(newAlbum.trackNames.head)
-        album.addPreviewUrl(newAlbum.previewUrls.head)
-      }
-    })
+        album.addSongs(newAlbum.songs.head)
+      })
     found
-    //
-    //    albums.toStream
-    //      .filter(album => album.collectionName.eq(newAlbum.collectionName))
-    //        .foreach(album=> {
-    //          album.addTrack(newAlbum.trackNames.head)
-    //          album.addPreviewUrl(newAlbum.previewUrls.head)
-    //        })
-    //    albums
+  }
+
+  def isSameAlbum(newAlbum: Album, album: Album): Boolean = {
+    album.collectionName.equals(newAlbum.collectionName)
   }
 }
 
