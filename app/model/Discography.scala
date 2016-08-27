@@ -1,9 +1,10 @@
 package model
 
 import java.util.NoSuchElementException
-import rx.lang.scala.Observable
-import scala.util.parsing.json.{JSONArray, JSONObject}
+
 import implicits.Utils.anyUtils
+
+import scala.util.parsing.json.{JSONArray, JSONObject}
 
 /**
   * Created by pabloperezgarcia on 27/8/16.
@@ -18,7 +19,9 @@ object Discography {
       val jsonAlbum = new JSONObject(json.asStringMap)
       try {
         val album = AlbumFactory.create(jsonAlbum)
-        albums = albums ++ List(album)
+        if (!mergeAlbum(album, albums)) {
+          albums = albums ++ List(album)
+        }
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding album:$jsonAlbum")
@@ -28,21 +31,25 @@ object Discography {
     albums
   }
 
-  def mergeAlbums(a: Album, albums: List[Album]): List[Album] = {
-    Observable.just(a)
-      .map(newAlbum => Observable.from(albums)
-        .filter(album => album.equals(newAlbum.collectionName))
-        .map(album => {
-          album.addTrack(newAlbum.trackNames.head)
-          album.addPreviewUrl(newAlbum.previewUrls.head)
-          album
-        }).toList)
-      .switchIfEmpty(Observable.from(List(a)))
-      .toBlocking
-      .last
-      .asInstanceOf[List[Album]]
+  def mergeAlbum(newAlbum: Album, albums: List[Album]): Boolean = {
+    var found = false
+    albums foreach (album => {
+      if (album.collectionName.equals(newAlbum.collectionName)) {
+        found = true
+        album.addTrack(newAlbum.trackNames.head)
+        album.addPreviewUrl(newAlbum.previewUrls.head)
+      }
+    })
+    found
+    //
+    //    albums.toStream
+    //      .filter(album => album.collectionName.eq(newAlbum.collectionName))
+    //        .foreach(album=> {
+    //          album.addTrack(newAlbum.trackNames.head)
+    //          album.addPreviewUrl(newAlbum.previewUrls.head)
+    //        })
+    //    albums
   }
-
 }
 
 

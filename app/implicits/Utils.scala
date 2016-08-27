@@ -12,7 +12,7 @@ object Utils {
   }
 
   implicit class jsonArrayUtils(jsonArray: JSONArray) {
-    def asJson: JSONObject = new JSONObject(jsonArray.asInstanceOf[Map[String, Any]])
+    def firstJson: JSONObject = new JSONObject(jsonArray.list.head.asInstanceOf[Map[String, Any]])
   }
 
   implicit class optionUtils(o: Option[Any]) {

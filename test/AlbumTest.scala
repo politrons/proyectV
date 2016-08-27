@@ -10,9 +10,11 @@ class AlbumTest {
   @Test def mergeAlbums(): Unit = {
     val jsonArray = Itunes.mockItunes()
     val albums = Discography.create(jsonArray)
-    val album = AlbumFactory.create(jsonArray.asJson)
-    val mergedAlbums = Discography.mergeAlbums(album, albums)
-    assert(mergedAlbums.head.trackNames.size == 2)
+    val album = AlbumFactory.create(jsonArray.firstJson)
+    val mergedAlbums = Discography.mergeAlbum(album, albums)
+    assert(mergedAlbums)
+    assert(albums.head.trackNames.size == 16)
+
 
   }
 
