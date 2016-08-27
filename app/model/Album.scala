@@ -11,13 +11,6 @@ class Album(val artistName: String,
             val releaseDate: String
                  ) {
 
-//  artistName: String
-//  collectionName: String
-//  primaryGenreName: String
-//  country: String
-//  trackPrice: String
-//  releaseDate: String
-
   var trackNames: List[String]=List()
   var previewUrl: List[String]=List()
 

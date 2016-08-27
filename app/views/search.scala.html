@@ -1,5 +1,5 @@
-@import scala.util.parsing.json
-@(jsonArray: json.JSONArray)
+@import model.Album
+@(albums: List[Album])
 
 @main("Welcome to Project Video") {
 
@@ -7,66 +7,61 @@
 
     <html>
         <body>
-        @for((item, index) <- jsonArray.list.zipWithIndex) {
+        @for((album, index) <- albums.zipWithIndex) {
             <table>
                 <tr>
                     <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("artistName")</label>
+                        <label>@album.asInstanceOf[Album].artistName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("collectionName")</label>
+                        <label>@album.asInstanceOf[Album].collectionName</label>
+                    </td>
+                </tr>
+                @*<tr>*@
+                    @*<td>*@
+                        @*<label>@album.asInstanceOf[Album].get("trackName")</label>*@
+                    @*</td>*@
+                @*</tr>*@
+                <tr>
+                    <td>
+                        <label>@album.asInstanceOf[Album].primaryGenreName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("trackName")</label>
+                        <label>@album.asInstanceOf[Album].country</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("primaryGenreName")</label>
+                        <label>@album.asInstanceOf[Album].trackPrice</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("country")</label>
+                        <label>@album.asInstanceOf[Album].releaseDate</label>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("country")</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("trackPrice")</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>@item.asInstanceOf[Map[String, Any]].get("releaseDate")</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label></label>
+                @*<tr>*@
+                    @*<td>*@
+                        @*<label></label>*@
 
 
-                        <audio controls preload="none" style="width:480px;">
-                            <source src='@item.asInstanceOf[Map[String, Any]].get("previewUrl")' type="audio/mp4" />
-                        </audio>
-                    </td>
-                </tr>
+                        @*<audio controls preload="none" style="width:480px;">*@
+                            @*<source src='@album.asInstanceOf[Album].get("previewUrl")' type="audio/mp4" />*@
+                        @*</audio>*@
+                    @*</td>*@
+                @*</tr>*@
 
 
 
-                <tr>
-                    <td>
-                        <img src='@item.asInstanceOf[Map[String, Any]].get("artworkUrl100")'>
-                    </td>
-                </tr>
+                @*<tr>*@
+                    @*<td>*@
+                        @*<img src='@album.asInstanceOf[Album].get("artworkUrl100")'>*@
+                    @*</td>*@
+                @*</tr>*@
             </table>
 
         }
