@@ -12,17 +12,16 @@ object AlbumFactory {
   }
 
   def create(json: JSONObject): Album = {
-    val album = new Album(
+    new Album(
       json.obj.get("artistName").asString,
       json.obj.get("collectionName").asString,
       json.obj.get("primaryGenreName").asString,
       json.obj.get("country").asString,
       json.obj.get("trackPrice").asString,
-      json.obj.get("releaseDate").asString)
-
-    album.addTrack(json.obj.get("trackName").asString)
-    album.addPreviewUrl(json.obj.get("previewUrl").asString)
-    album
+      json.obj.get("releaseDate").asString,
+      json.obj.get("trackName").asString,
+      json.obj.get("previewUrl").asString
+    )
   }
 
 }

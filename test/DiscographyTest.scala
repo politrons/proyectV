@@ -13,6 +13,8 @@ class DiscographyTest {
     val jsonArray = Itunes.mockItunes()
     val albums = Discography.create(jsonArray)
     assert(albums.size == 49)
+    assert(albums.head.trackNames.size == 1)
+    assert(albums.head.previewUrls.size == 1)
   }
 
 

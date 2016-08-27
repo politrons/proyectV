@@ -12,4 +12,6 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
-libraryDependencies += "org.scalaj" % "scalaj-http_2.11" % "2.3.0"
+libraryDependencies ++= Seq("org.scalaj" % "scalaj-http_2.11" % "2.3.0",
+                            "io.reactivex" % "rxscala_2.11" % "0.26.1")
+
