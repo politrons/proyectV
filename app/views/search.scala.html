@@ -1,12 +1,9 @@
 @import model.Album
 @(albums: List[Album])
-
     @main("Welcome to Project Video") {
-
     <!DOCTYPE html>
-
         <html>
-            <body>
+            <body background="@routes.Assets.at("images/background.jpg")">
             @for((album, index) <- albums.zipWithIndex) {
                 <table>
                     <tr>
@@ -34,7 +31,7 @@
                                         @song.trackName
                                         </td>
                                         <td>
-                                            <audio controls preload="none" style="width:480px ;">
+                                            <audio controls preload="none" style="width:480px ; background-color: #99defd">
                                                 <source src='@song.previewUrl' type="audio/mp4" />
                                             </audio>
                                         </td>

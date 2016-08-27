@@ -10,8 +10,8 @@ class BaseController extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def search = Action {
-    get("itunes.apple.com/search?term=jack+johnson", "https")
+  def search(artist:String) = Action {
+    get(s"itunes.apple.com/search?term=${artist.replace(" ", "+")}", "https")
     Ok(views.html.search(Discography.create(lastResponse.get)))
   }
 
