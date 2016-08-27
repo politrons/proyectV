@@ -17,5 +17,4 @@ class DiscographyTest {
     assert(albums.head.previewUrls.size == 1)
   }
 
-
 }

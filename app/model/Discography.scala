@@ -1,8 +1,9 @@
 package model
 
 import java.util.NoSuchElementException
-
+import rx.lang.scala.Observable
 import scala.util.parsing.json.{JSONArray, JSONObject}
+import implicits.Utils.anyUtils
 
 /**
   * Created by pabloperezgarcia on 27/8/16.
@@ -14,7 +15,7 @@ object Discography {
     var albums: List[Album] = List()
 
     array.list foreach (json => {
-      val jsonAlbum = new JSONObject(json.asInstanceOf[Map[String, Any]])
+      val jsonAlbum = new JSONObject(json.asStringMap)
       try {
         val album = AlbumFactory.create(jsonAlbum)
         albums = albums ++ List(album)
@@ -26,13 +27,21 @@ object Discography {
     })
     albums
   }
-//
-//  def mergeAlbums(album: Album, albums: List[Album]): List[Album] = {
-//    Observable.from(albums)
-//      .map(al => Observable.just(al.collectionName)
-//        .filter(disc => disc.equals(album.collectionName))
-//        .map(x => al.addTrack(album.trackNames)
-//  }
+
+  def mergeAlbums(a: Album, albums: List[Album]): List[Album] = {
+    Observable.just(a)
+      .map(newAlbum => Observable.from(albums)
+        .filter(album => album.equals(newAlbum.collectionName))
+        .map(album => {
+          album.addTrack(newAlbum.trackNames.head)
+          album.addPreviewUrl(newAlbum.previewUrls.head)
+          album
+        }).toList)
+      .switchIfEmpty(Observable.from(List(a)))
+      .toBlocking
+      .last
+      .asInstanceOf[List[Album]]
+  }
 
 }
 

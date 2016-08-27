@@ -2,14 +2,14 @@ package model
 
 import scala.util.parsing.json.JSONObject
 
+import implicits.Utils.optionUtils
+
+
 /**
   * Created by pabloperezgarcia on 27/8/16.
   */
 object AlbumFactory {
 
-  implicit class parseJson(o: Option[Any]) {
-    def asString: String = String.valueOf(o.get)
-  }
 
   def create(json: JSONObject): Album = {
     new Album(
