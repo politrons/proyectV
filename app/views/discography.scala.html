@@ -34,10 +34,13 @@
                                         <td>
                                         @song.trackName
                                         </td>
-                                        <td>
-                                            <audio controls preload="none" class="song"">
-                                            <source src='@song.previewUrl' type="audio/mp4" />
+                                        <td class="td_song">
+                                            <audio controls preload="none" class="song">
+                                                <source src='@song.previewUrl' type="audio/mp4" />
                                             </audio>
+                                        </td>
+                                        <td>
+                                            <label class="price">Price:@song.trackPrice</label>
                                         </td>
                                     </tr>
                                 }
@@ -52,11 +55,6 @@
                     <tr>
                         <td>
                             <label>Country:@album.asInstanceOf[Album].country</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Price:@album.asInstanceOf[Album].trackPrice</label>
                         </td>
                     </tr>
                     <tr>
@@ -101,9 +99,9 @@ width: 250px ;
 }
 
 .song {
-width: 480px ;
+width: 300px ;
 position: relative ;
-left: 200px ;
+left: 150px ;
 }
 
 .image {
@@ -113,4 +111,13 @@ border-top-left-radius: 10px ;
 border-top-right-radius: 10px ;
 }
 
+.price {
+position: relative;
+left: 300px;
+}
+
+.td_song {
+position: relative;
+left: 130px;
+}
 </style>

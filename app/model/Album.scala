@@ -14,7 +14,7 @@ class Album(val artistName: String,
             val artWorkUrl: String
            ) {
 
-  var songs: List[Song] = List(new Song(trackName, previewUrl))
+  var songs: List[Song] = List(new Song(trackName, previewUrl, trackPrice))
 
   def addSongs(song: Song) {
     songs = songs.::(song)
