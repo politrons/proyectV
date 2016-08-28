@@ -4,7 +4,8 @@
 
 # Home page
 GET        /                    controllers.BaseController.index
-GET        /search              controllers.BaseController.search(artist:String )
+GET        /search              controllers.BaseController.search
+GET        /discography         controllers.BaseController.discography
 
 
 # Map static resources from the /public folder to the /assets URL path
