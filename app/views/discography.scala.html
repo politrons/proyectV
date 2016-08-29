@@ -7,7 +7,7 @@
         <input type="input" class="search_field" name="artist">
         <input type="submit" class="search" value="search">
         @for((album, index) <- albums.zipWithIndex) {
-            <table>
+            <table class="mainTable">
                 <tr>
                     <td>
                         <img class="image" src='@album.asInstanceOf[Album].artWorkUrl'>
@@ -29,17 +29,19 @@
                             <label>Songs:</label>
                             @for((song, index) <- album.asInstanceOf[Album].songs.zipWithIndex) {
                                 <tr>
-                                    <td>
-                                    @song.trackName
-                                    </td>
                                     <td class="td_song">
+                                        <label>@song.trackName</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <audio controls preload="none" class="song">
                                             <source src='@song.previewUrl' type="audio/mp4" />
                                         </audio>
                                     </td>
-                                    @*<td>*@
-                                    @*<label class="price">Price:@song.trackPrice</label>*@
-                                    @*</td>*@
+                                    <td>
+                                        <label class="price">Price:@song.trackPrice</label>
+                                    </td>
                                     @if(song.videoClip != null) {
                                         <td>
                                             <video controls="" class="video">
@@ -102,7 +104,7 @@ width: 250px ;
 }
 
 .song {
-width: 300px ;
+width: 350px ;
 position: relative ;
 left: 150px ;
 }
@@ -116,17 +118,18 @@ border-top-right-radius: 10px ;
 
 .price {
 position: relative ;
-left: 300px ;
+left: 160px ;
 }
 
 .td_song {
 position: relative ;
 left: 130px ;
+width: 15px;
 }
 
 .songs_table {
 position: relative ;
-left: 40px ;
+left: -90px ;
 }
 
 .video {
@@ -135,6 +138,10 @@ left: 220px ;
 width: 200px ;
 height: 200px ;
 }
-
+.mainTable {
+/*position:relative ;*/
+/*width: 200px ;*/
+/*height: 200px ;*/
+}
 
 </style>
