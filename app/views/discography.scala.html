@@ -2,73 +2,76 @@
 @import views.html.helper.form
 @(albums: List[Album])
 @main("Welcome to Project Video") {
-<!DOCTYPE html>
-    <html>
-        <body background="@routes.Assets.at("images/background.jpg")">
-        @form(action = routes.BaseController.discography) {
-            <input type="input" class="search_field" name="artist">
-            <input type="submit" class="search" value="search">
-            @for((album, index) <- albums.zipWithIndex) {
-                <table>
-                    <tr>
-                        <td>
-                            <img class="image" src='@album.asInstanceOf[Album].artWorkUrl'>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Artis:@album.asInstanceOf[Album].artistName</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Album:@album.asInstanceOf[Album].collectionName</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table>
-                                <label>Songs:</label>
-                                @for((song, index) <- album.asInstanceOf[Album].songs.zipWithIndex) {
-                                    <tr>
+    <body background="@routes.Assets.at("images/background.jpg")">
+    @form(action = routes.BaseController.discography) {
+        <input type="input" class="search_field" name="artist">
+        <input type="submit" class="search" value="search">
+        @for((album, index) <- albums.zipWithIndex) {
+            <table>
+                <tr>
+                    <td>
+                        <img class="image" src='@album.asInstanceOf[Album].artWorkUrl'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Artis:@album.asInstanceOf[Album].artistName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Album:@album.asInstanceOf[Album].collectionName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="songs_table">
+                            <label>Songs:</label>
+                            @for((song, index) <- album.asInstanceOf[Album].songs.zipWithIndex) {
+                                <tr>
+                                    <td>
+                                    @song.trackName
+                                    </td>
+                                    <td class="td_song">
+                                        <audio controls preload="none" class="song">
+                                            <source src='@song.previewUrl' type="audio/mp4" />
+                                        </audio>
+                                    </td>
+                                    @*<td>*@
+                                    @*<label class="price">Price:@song.trackPrice</label>*@
+                                    @*</td>*@
+                                    @if(song.videoClip != null) {
                                         <td>
-                                        @song.trackName
+                                            <video controls="" class="video">
+                                                <source src="@song.videoClip.previewUrl" type="video/mp4"/>
+                                            </video>
                                         </td>
-                                        <td class="td_song">
-                                            <audio controls preload="none" class="song">
-                                                <source src='@song.previewUrl' type="audio/mp4" />
-                                            </audio>
-                                        </td>
-                                        <td>
-                                            <label class="price">Price:@song.trackPrice</label>
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Genre:@album.asInstanceOf[Album].primaryGenreName</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Country:@album.asInstanceOf[Album].country</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Release date:@album.asInstanceOf[Album].releaseDate</label>
-                        </td>
-                    </tr>
-                </table>
-                <hr>
-                }
-        }
-        </body>
-
-    </html>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Genre:@album.asInstanceOf[Album].primaryGenreName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Country:@album.asInstanceOf[Album].country</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Release date:@album.asInstanceOf[Album].releaseDate</label>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            }
+    }
+    </body>
 
 
 }
@@ -112,12 +115,26 @@ border-top-right-radius: 10px ;
 }
 
 .price {
-position: relative;
-left: 300px;
+position: relative ;
+left: 300px ;
 }
 
 .td_song {
-position: relative;
-left: 130px;
+position: relative ;
+left: 130px ;
 }
+
+.songs_table {
+position: relative ;
+left: 40px ;
+}
+
+.video {
+position:relative ;
+left: 220px ;
+width: 200px ;
+height: 200px ;
+}
+
+
 </style>

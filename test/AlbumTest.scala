@@ -1,6 +1,7 @@
+import factories.AlbumFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.Itunes
-import model.{AlbumFactory, Discography}
+import model.Discography
 import org.junit.Test
 /**
   * Created by pabloperezgarcia on 18/8/16.
@@ -8,8 +9,8 @@ import org.junit.Test
 class AlbumTest {
 
   @Test def mergeAlbums(): Unit = {
-    val jsonArray = Itunes.mockItunes()
-    val albums = Discography.create(jsonArray)
+    val jsonArray = Itunes.mockMusic()
+    val albums = Discography.albums(jsonArray)
     val album = AlbumFactory.create(jsonArray.firstJson)
     val mergedAlbums = Discography.mergeAlbum(album, albums)
     assert(mergedAlbums)

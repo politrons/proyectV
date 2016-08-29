@@ -12,14 +12,17 @@ class BaseController extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def search() = Action { implicit request =>
-    Ok(views.html.discography(Discography.create(new JSONArray(List()))))
+  def search() = Action {
+    Ok(views.html.discography(Discography.albums(new JSONArray(List()))))
   }
 
   def discography = Action { implicit request =>
     val artist: Option[String] = request.getQueryString("artist")
     get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+")}", "https")
-    Ok(views.html.discography(Discography.create(lastResponse.get)))
+    val albums = Discography.albums(lastResponse.get)
+    get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+").concat("&entity=musicVideo")}", "https")
+    Discography.attachVideos(lastResponse.get, albums)
+    Ok(views.html.discography(albums))
   }
 
 }

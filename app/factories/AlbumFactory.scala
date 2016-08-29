@@ -1,8 +1,9 @@
-package model
-
-import scala.util.parsing.json.JSONObject
+package factories
 
 import implicits.Utils.optionUtils
+import model.Album
+
+import scala.util.parsing.json.JSONObject
 
 
 /**
