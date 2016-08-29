@@ -1,5 +1,5 @@
 import mocks.Itunes
-import model.Discography
+import model.music.Discography
 import org.junit.Test
 
 

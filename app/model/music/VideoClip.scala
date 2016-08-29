@@ -1,4 +1,4 @@
-package model
+package model.music
 
 /**
   * Created by pabloperezgarcia on 27/8/16.

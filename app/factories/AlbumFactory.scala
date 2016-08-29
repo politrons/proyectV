@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.Album
+import model.music.Album
 
 import scala.util.parsing.json.JSONObject
 
@@ -19,6 +19,7 @@ object AlbumFactory {
       json.obj.get("primaryGenreName").asString,
       json.obj.get("country").asString,
       json.obj.get("trackPrice").asString,
+      json.obj.get("trackViewUrl").asString,
       json.obj.get("releaseDate").asString,
       json.obj.get("trackName").asString,
       json.obj.get("previewUrl").asString,

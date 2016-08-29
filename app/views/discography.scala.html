@@ -1,5 +1,4 @@
-@import model.Album
-@import views.html.helper.form
+@import model.music.Album
 @(albums: List[Album])
 @main("Welcome to Project Video") {
     <body background="@routes.Assets.at("images/background.jpg")">
@@ -41,6 +40,9 @@
                                     </td>
                                     <td>
                                         <label class="price">Price:@song.trackPrice</label>
+                                    </td>
+                                    <td>
+                                        <a class="buy_itunes" href="@song.trackViewUrl" class="button">Buy</a>
                                     </td>
                                     @if(song.videoClip != null) {
                                         <td>
@@ -144,4 +146,11 @@ height: 200px ;
 /*height: 200px ;*/
 }
 
+.buy_itunes {
+position: relative;
+left: 160px;
+}
+
 </style>
+@import model.music.Album
+@import views.html.helper.form

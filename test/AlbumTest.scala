@@ -1,7 +1,7 @@
 import factories.AlbumFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.Itunes
-import model.Discography
+import model.music.Discography
 import org.junit.Test
 /**
   * Created by pabloperezgarcia on 18/8/16.

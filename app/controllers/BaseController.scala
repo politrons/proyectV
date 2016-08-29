@@ -1,8 +1,9 @@
 package controllers
 
 import http.HttpClient._
-import model.Discography
+import model.music.Discography
 import play.api.mvc._
+import views.html
 
 import scala.util.parsing.json.JSONArray
 
@@ -13,7 +14,7 @@ class BaseController extends Controller {
   }
 
   def search() = Action {
-    Ok(views.html.discography(Discography.albums(new JSONArray(List()))))
+    Ok(html.discography(Discography.albums(new JSONArray(List()))))
   }
 
   def discography = Action { implicit request =>
@@ -22,7 +23,7 @@ class BaseController extends Controller {
     val albums = Discography.albums(lastResponse.get)
     get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+").concat("&entity=musicVideo")}", "https")
     Discography.attachVideos(lastResponse.get, albums)
-    Ok(views.html.discography(albums))
+    Ok(html.discography(albums))
   }
 
 }
