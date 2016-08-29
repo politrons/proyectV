@@ -1,6 +1,8 @@
 @import model.music.Album
+@import views.html.helper.form
 @(albums: List[Album])
 @main("Welcome to Project Video") {
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
     @form(action = routes.BaseController.discography) {
         <input type="input" class="search_field" name="artist">
@@ -79,78 +81,4 @@
 
 
 }
-<style>
 
-
-.search {
-background-color: #d2ffff ;
-border-bottom-right-radius: 10px ;
-border-bottom-left-radius: 10px ;
-border-top-left-radius: 10px ;
-border-top-right-radius: 10px ;
-position: relative ;
-left: 285px ;
-top: 80px ;
-width: 80px ;
-}
-
-.search_field {
-border-bottom-right-radius: 10px ;
-border-bottom-left-radius: 10px ;
-border-top-left-radius: 10px ;
-border-top-right-radius: 10px ;
-position: relative ;
-left: 450px ;
-top:40px ;
-width: 250px ;
-}
-
-.song {
-width: 350px ;
-position: relative ;
-left: 150px ;
-}
-
-.image {
-border-bottom-right-radius: 10px ;
-border-bottom-left-radius: 10px ;
-border-top-left-radius: 10px ;
-border-top-right-radius: 10px ;
-}
-
-.price {
-position: relative ;
-left: 160px ;
-}
-
-.td_song {
-position: relative ;
-left: 130px ;
-width: 15px;
-}
-
-.songs_table {
-position: relative ;
-left: -90px ;
-}
-
-.video {
-position:relative ;
-left: 220px ;
-width: 200px ;
-height: 200px ;
-}
-.mainTable {
-/*position:relative ;*/
-/*width: 200px ;*/
-/*height: 200px ;*/
-}
-
-.buy_itunes {
-position: relative;
-left: 160px;
-}
-
-</style>
-@import model.music.Album
-@import views.html.helper.form

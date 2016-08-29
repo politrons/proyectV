@@ -8,7 +8,7 @@ import scala.util.parsing.json.JSONObject
 /**
   * Created by pabloperezgarcia on 28/8/16.
   */
-object VideoClipFactory {
+object VideoClip {
   def create(videoClip: JSONObject): VideoClip = {
     new VideoClip(videoClip.obj.get("artistName").asString,
       videoClip.obj.get("trackName").asString,

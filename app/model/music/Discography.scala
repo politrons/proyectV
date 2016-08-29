@@ -1,6 +1,6 @@
 package model.music
 
-import factories.{AlbumFactory, VideoClipFactory}
+import factories.{AlbumFactory, VideoClip}
 import implicits.Utils.anyUtils
 
 import scala.util.parsing.json.{JSONArray, JSONObject}
@@ -32,7 +32,7 @@ object Discography {
     videosArray.list foreach (json => {
       val jsonVideo = new JSONObject(json.asStringMap)
       try {
-        val videoClip = VideoClipFactory.create(jsonVideo)
+        val videoClip = VideoClip.create(jsonVideo)
         mergeVideoClips(videoClip, albums)
       } catch {
         case e: NoSuchElementException => {
