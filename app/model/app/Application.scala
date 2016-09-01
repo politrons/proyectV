@@ -5,7 +5,6 @@ package model.app
   */
 class Application(val artistName: String,
                   val trackName: String,
-                  val trackCensoredName: String,
                   val artistViewUrl: String,
                   val trackViewUrl: String,
                   val price: String,

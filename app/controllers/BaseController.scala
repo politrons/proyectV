@@ -1,6 +1,7 @@
 package controllers
 
 import http.HttpClient._
+import model.app.AppleStore
 import model.music.Discography
 import play.api.mvc._
 import views.html
@@ -26,7 +27,17 @@ class BaseController extends Controller {
     Ok(html.discography(albums))
   }
 
+  def application = Action { implicit request =>
+    val artist: Option[String] = request.getQueryString("app")
+    if (!artist.isDefined) {
+      Ok(html.application(AppleStore.applications(new JSONArray(List()))))
+    } else {
+      get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+").concat("&country=us&entity=software")}", "https")
+      val apps = AppleStore.applications(lastResponse.get)
+      Ok(html.application(apps))
+    }
+  }
+
 }
 
 
-//https://itunes.apple.com/search?term=yelp&country=us&entity=software

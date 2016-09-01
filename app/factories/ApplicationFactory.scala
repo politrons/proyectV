@@ -16,7 +16,6 @@ object ApplicationFactory {
     new Application(
       json.obj.get("artistName").asString,
       json.obj.get("trackName").asString,
-      json.obj.get("trackCensoredName").asString,
       json.obj.get("artistViewUrl").asString,
       json.obj.get("trackViewUrl").asString,
       json.obj.get("price").asString,

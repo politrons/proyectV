@@ -1,0 +1,50 @@
+@import model.app.Application
+@import views.html.helper.form
+@(apps: List[Application])
+@main("Welcome to Project Video") {
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
+    <body background="@routes.Assets.at("images/background.jpg")">
+    @form(action = routes.BaseController.application()) {
+        <input type="input" class="search_field" name="app">
+        <input type="submit" class="search" value="search">
+        @for((app, index) <- apps.zipWithIndex) {
+            <table class="mainTable">
+                <tr>
+                    <td>
+                        <img class="image" src='@app.artworkUrl'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Company:@app.artistName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Application:@app.trackName</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="@app.trackViewUrl" class="button">Buy</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="@app.artistViewUrl" class="button">More games</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Price:@app.price</label>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            }
+    }
+    </body>
+
+
+}
+

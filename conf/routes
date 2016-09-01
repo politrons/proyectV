@@ -6,6 +6,8 @@
 GET        /                    controllers.BaseController.index
 GET        /search              controllers.BaseController.search
 GET        /discography         controllers.BaseController.discography
+GET        /application         controllers.BaseController.application
+
 
 
 # Map static resources from the /public folder to the /assets URL path
