@@ -17,11 +17,9 @@ object ApplicationFactory {
       json.obj.get("artistName").asString,
       json.obj.get("trackName").asString,
       json.obj.get("trackCensoredName").asString,
-      json.obj.get("artworkUrl100").asString,
       json.obj.get("artistViewUrl").asString,
       json.obj.get("trackViewUrl").asString,
       json.obj.get("price").asString,
-      json.obj.get("previewUrl").asString,
       json.obj.get("artworkUrl100").asString
     )
   }

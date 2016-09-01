@@ -6,7 +6,7 @@ import scala.util.parsing.json.{JSONArray, JSON}
 /**
   * Created by pabloperezgarcia on 27/8/16.
   */
-object Itunes {
+object ItunesMock {
 
   def mockMusic(): JSONArray ={
     val source = Source.fromURL(getClass.getResource("/music.json")).getLines.mkString
