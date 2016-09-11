@@ -4,7 +4,8 @@
 @main("Welcome to Project Video") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
-    @form(action = routes.BaseController.movie()) {
+        <img class="apple_tv_logo" src="@routes.Assets.at("images/logo-appletv.png")">
+        @form(action = routes.BaseController.movie()) {
         <input type="input" class="search_field" name="movie">
         <input type="submit" class="search" value="search">
         @for((movie, index) <- movies.zipWithIndex) {
@@ -21,7 +22,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>Application:@movie.trackName</label>
+                        <label>Title:@movie.trackName</label>
                     </td>
                 </tr>
                 <tr>
@@ -60,4 +61,18 @@
 
 
 }
+
+<style>
+.apple_tv_logo {
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+width: 120px;
+height: 90px;
+position: relative;
+left: 525px;
+top: 32px;
+}
+</style>
 

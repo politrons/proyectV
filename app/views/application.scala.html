@@ -4,7 +4,8 @@
 @main("Welcome to Project Video") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
-    @form(action = routes.BaseController.application()) {
+        <img class="app_store_logo" src="@routes.Assets.at("images/app-store-icon.png")">
+        @form(action = routes.BaseController.application()) {
         <input type="input" class="search_field" name="app">
         <input type="submit" class="search" value="search">
         @for((app, index) <- apps.zipWithIndex) {
@@ -47,4 +48,18 @@
 
 
 }
+
+<style>
+.app_store_logo {
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+width: 120px;
+height: 90px;
+position: relative;
+left: 525px;
+top: 32px;
+}
+</style>
 

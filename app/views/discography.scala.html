@@ -4,7 +4,8 @@
 @main("Welcome to Project Video") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
-    @form(action = routes.BaseController.discography) {
+        <img class="itunes_logo" src="@routes.Assets.at("images/itunes.png")">
+        @form(action = routes.BaseController.discography) {
         <input type="input" class="search_field" name="artist">
         <input type="submit" class="search" value="search">
         @for((album, index) <- albums.zipWithIndex) {
@@ -82,3 +83,16 @@
 
 }
 
+<style>
+.itunes_logo {
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+width: 100px;
+height: 100px;
+position: relative;
+left: 530px;
+top: 40px;
+}
+</style>
