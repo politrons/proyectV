@@ -1,9 +1,31 @@
+@import views.html.helper.form
+
 @(message: String)
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
+<body background="@routes.Assets.at("images/background.jpg")">
+    <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
 
-    @main("Welcome to Project Video") {
-
-
-        <h1>Welcome to proyect V</h1>
-
-
+    @form(action = routes.BaseController.application()) {
+        <button class="search">Apps</button>
     }
+    @form(action = routes.BaseController.discography()) {
+        <button class="search">Music</button>
+    }
+    @form(action = routes.BaseController.movie()) {
+        <button class="search">Movies</button>
+    }
+</body>
+
+<style>
+.apple_logo {
+border-bottom-right-radius: 10px ;
+border-bottom-left-radius: 10px ;
+border-top-left-radius: 10px ;
+border-top-right-radius: 10px ;
+width: 100px ;
+height: 130px ;
+position: relative ;
+left: 270px ;
+top: 50px ;
+}
+</style>

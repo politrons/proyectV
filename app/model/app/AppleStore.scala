@@ -18,7 +18,7 @@ object AppleStore {
         applications = applications ++ List(application)
       } catch {
         case e: NoSuchElementException => {
-          println(s"Error adding album:$json")
+          println(s"Error adding app:$json")
         }
       }
     })
