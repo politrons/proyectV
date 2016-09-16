@@ -11,18 +11,28 @@ import scala.util.parsing.json.JSONArray
 
 class BaseController extends Controller {
 
+   var country="us"
+
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
+
+  def selectCountry = Action { implicit request =>
+    val newCountry: Option[String] = request.getQueryString("country")
+    country=newCountry.get
+    Ok(views.html.index("Your new application is ready."))
+  }
+
+  private val appleAPI: String = "itunes.apple.com/search?term="
 
   def discography = Action { implicit request =>
     val artist: Option[String] = request.getQueryString("artist")
     if (artist.isEmpty) {
       Ok(html.discography(Discography.albums(new JSONArray(List()))))
     }else {
-      get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+")}", "https")
+      get(s"$appleAPI${artist.get.replace(" ", "+")}", "https")
       val albums = Discography.albums(lastResponse.get)
-      get(s"itunes.apple.com/search?term=${artist.get.replace(" ", "+").concat("&entity=musicVideo")}", "https")
+      get(s"$appleAPI${artist.get.replace(" ", "+").concat(s"&country=$country&entity=musicVideo")}", "https")
       Discography.attachVideos(lastResponse.get, albums)
       Ok(html.discography(albums))
     }
@@ -33,7 +43,7 @@ class BaseController extends Controller {
     if (app.isEmpty) {
       Ok(html.application(AppleStore.applications(new JSONArray(List()))))
     } else {
-      get(s"itunes.apple.com/search?term=${app.get.replace(" ", "+").concat("&country=us&entity=software")}", "https")
+      get(s"$appleAPI${app.get.replace(" ", "+").concat(s"&country=$country&entity=software")}", "https")
       val apps = AppleStore.applications(lastResponse.get)
       Ok(html.application(apps))
     }
@@ -44,7 +54,7 @@ class BaseController extends Controller {
     if (movie.isEmpty) {
       Ok(html.movie(AppleTv.movies(new JSONArray(List()))))
     } else {
-      get(s"itunes.apple.com/search?term=${movie.get.replace(" ", "+").concat("&country=us&entity=movie")}", "https")
+      get(s"$appleAPI${movie.get.replace(" ", "+").concat(s"&country=$country&entity=movie")}", "https")
       val movies = AppleTv.movies(lastResponse.get)
       Ok(html.movie(movies))
     }

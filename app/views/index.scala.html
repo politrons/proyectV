@@ -1,7 +1,12 @@
 @import views.html.helper.form
 
 @(message: String)
-<link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/discography.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
+@form(action = routes.BaseController.selectCountry) {
+    <button name="country" value="us"><img src="@routes.Assets.at("images/us-flag.GIF")"/></button>
+    <button name="country" value="es"><img src="@routes.Assets.at("images/flag-es.gif")" /></button>
+    <button name="country" value="uk"><img src="@routes.Assets.at("images/flag-uk.jpg")"/></button>
+}
 <body background="@routes.Assets.at("images/background.jpg")">
     <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
 
