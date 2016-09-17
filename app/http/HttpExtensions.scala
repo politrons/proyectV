@@ -1,15 +1,13 @@
 package http
 
-import exceptions.HttpResponseException
-
 import scala.util.parsing.json._
 import scalaj.http.{HttpRequest, HttpResponse}
 
 trait HttpExtensions {
 
-  def CONNECT_TIMEOUT: Int = 10000
+  def CONNECT_TIMEOUT: Int = 60000
 
-  def READ_TIMEOUT: Int = 10000
+  def READ_TIMEOUT: Int = 60000
 
   implicit class HttpRequestExt(request: HttpRequest) {
     def sendJson: HttpResponse[String] = {
@@ -21,18 +19,10 @@ trait HttpExtensions {
       request.header("content-type", "application/json")
     }
 
-    def asJson:JSONArray = {
-      val response: HttpResponse[String] = request.asString
-      if (response.isSuccess) {
-        val map = JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-        val jsonList= map.get("results").get.asInstanceOf[List[Map[String, Any]]]
-        new JSONArray(jsonList)
-      }
-      else
-        throw new HttpResponseException(s"Error: $response")
+    def asJson(function: HttpRequest => JSONArray):JSONArray = {
+      function.apply(request)
     }
 
   }
-
 
 }

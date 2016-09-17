@@ -1,0 +1,228 @@
+{
+  "appnews": {
+    "appid": 440,
+    "newsitems": [
+      {
+        "gid": "243581623181146212",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581623181146212",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed a case where crouching was used to see outside of the playable area. This could be exploited to place buildings at invalid locations. ;* Fixed...",
+        "feedlabel": "TF2 Blog",
+        "date": 1473978900,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243581623181073328",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/24235/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed a case where crouching was used to see outside of the playable area. This could be exploited to place buildings at invalid locations. * Fixed ...",
+        "feedlabel": "Product Update",
+        "date": 1473978900,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "243581623177431716",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581623177431716",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed a regression in Mann vs. Machine where stunned bots could not pick-up the bomb ;* Fixed being able to damage enemies through gates with the Co...",
+        "feedlabel": "TF2 Blog",
+        "date": 1473891300,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243581623177422593",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/24206/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed a regression in Mann vs. Machine where stunned bots could not pick-up the bomb; * Fixed being able to damage enemies through gates with the Co...",
+        "feedlabel": "Product Update",
+        "date": 1473891300,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "243581103973006867",
+        "title": "Tip of the Hats 2016",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581103973006867",
+        "is_external_url": true,
+        "author": "",
+        "contents": "<a href=\"http://tipofthehats.org/\">Tip of the Hats 2016</a> is starting this coming weekend! Join the fun September 16th through the 18th, from 9am to 9pm PST, or check out the live stream on <a href=\"https://www.twitch.tv/tipofthehats\">Twitch</a>. Tip of the Hats is a charity event hosted and supported by members of the TF community. Since 2013, it has raised over $320,000 for <a href=\"http://www.onestepcamp.org/\" target=\"_blank\">Childre...</a>",
+        "feedlabel": "TF2 Blog",
+        "date": 1473799080,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243581103969782138",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581103969782138",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed an exploit related to not respawning in the spawn room at the beginning of Casual and Competitive matches ;* Fixed Pyros griefing teammates by...",
+        "feedlabel": "TF2 Blog",
+        "date": 1473722100,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243581103969760421",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/24156/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed an exploit related to not respawning in the spawn room at the beginning of Casual and Competitive matches; * Fixed Pyros griefing teammates by...",
+        "feedlabel": "Product Update",
+        "date": 1473722100,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "243581103958862463",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581103958862463",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fix the Righteous Bison projectiles colliding with, but not impacting, some doors (ex. the BLU spawn doors of cp_mountainlab) ;* Updated the localiz...",
+        "feedlabel": "TF2 Blog",
+        "date": 1473460980,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243581103958857252",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/24117/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fix the Righteous Bison projectiles colliding with, but not impacting, some doors (ex. the BLU spawn doors of cp_mountainlab); * Updated the localiz...",
+        "feedlabel": "Product Update",
+        "date": 1473460980,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "243581103958674223",
+        "title": "The 2016 UGC League Fall Season is Starting!",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243581103958674223",
+        "is_external_url": true,
+        "author": "",
+        "contents": "<a href=\"http://www.ugcleague.com/\"> </a> Prepare yourself, the UGC League Fall Season is about to start! Join the 1,000 teams that played last season for some competitive TF2 action! The first week of matches starts late this month: <b>September 21st for 6v6, September 24th for 4v4, and September 26th for Highlander.</b> UGC has over 8,000 play...",
+        "feedlabel": "TF2 Blog",
+        "date": 1473456420,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "243580289139738626",
+        "title": "Infiltrate randomly generated cults ruled by the voices of GLaDOS and TF2's Sniper",
+        "url": "http://store.steampowered.com/news/externalpost/pcgamer/243580289139738626",
+        "is_external_url": true,
+        "author": "",
+        "contents": "<a href=\"http://www.pcgamer.com/infiltrate-a-1970s-religious-cult-in-the-church-in-the-darkness/\" target=\"_blank\">The Church in the Darkness</a> plays like top down Hitman-lite in a 1970s religious cult. Your character decides to check in on a relative and infiltrates the sect to figure out how they're doing and what's really going on at church camp. You navigate buildings and avoid the scrutiny of the cultists by ...",
+        "feedlabel": "PC Gamer",
+        "date": 1473359083,
+        "feedname": "pcgamer"
+      },
+      {
+        "gid": "243580289133117333",
+        "title": "Team Fortress 2 gets equipped with Mega Man map, thanks to talented modder",
+        "url": "http://store.steampowered.com/news/externalpost/pcgamer/243580289133117333",
+        "is_external_url": true,
+        "author": "",
+        "contents": "Every once in awhile you find a crossover between two different videogames that on paper makes no sense until you see it in action. That's how I feel about Steam user Pancake's \"<a href=\"https://steamcommunity.com/sharedfiles/filedetails/?id=630416701\"> MegaMan 6 </a>\" collection of TF2 maps. Divided up into eight separate arenas themed after a different boss, you can now wax ...",
+        "feedlabel": "PC Gamer",
+        "date": 1473201250,
+        "feedname": "pcgamer"
+      },
+      {
+        "gid": "243580289110761245",
+        "title": "Announcing ETF2L's 25th Season",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/243580289110761245",
+        "is_external_url": true,
+        "author": "",
+        "contents": "<a href=\"http://etf2l.org/?p=233879\"> </a> The European Team Fortress 2 League (ETF2L) Season 25 <a href=\"http://etf2l.org/?p=233879\">schedule and signups</a> have opened! The season is kicking off with a 6v6 cup, testing new maps and weapon pickups. Signups are open until <b>September 15th at 21:00 CEST</b>. Any 6v6 or Fun Team that has 6 players on the roster at the end of signups is ...",
+        "feedlabel": "TF2 Blog",
+        "date": 1472666040,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "250335145796016339",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/250335145796016339",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed the Short Circuit causing lag compensation problems on the server ;* Fixed sappers sometimes only being applied to one Engineer teleporter ;* ...",
+        "feedlabel": "TF2 Blog",
+        "date": 1472518380,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "250335145796014713",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/23851/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed the Short Circuit causing lag compensation problems on the server; * Fixed sappers sometimes only being applied to one Engineer teleporter; * ...",
+        "feedlabel": "Product Update",
+        "date": 1472518380,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "252586225995787665",
+        "title": "We Turned 20 Today!",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/252586225995787665",
+        "is_external_url": true,
+        "author": "",
+        "contents": "Team Fortress turns <b>20</b> today, and that means we're celebrating! Jump in a game and enjoy hats, cake, beach balls, presents, confetti and more cake! And if that wasn't enough for you, you can annoy your teammates and enemies alike with the screeching sounds of <a href=\"https://wiki.teamfortress.com/wiki/Noise_Maker#Team_Fortress_Birthday\">full-on birthday joy</a>. Remember, you can ...",
+        "feedlabel": "TF2 Blog",
+        "date": 1472074500,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "252586225992329631",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/23709/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Added \"Party Hat\" and \"Noise Maker - TF Birthday\" item grants to players who don't already have them during TF2's birthday; * Fixed some classes not...",
+        "feedlabel": "Product Update",
+        "date": 1471991760,
+        "feedname": "steam_updates"
+      },
+      {
+        "gid": "252586225992337037",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/252586225992337037",
+        "is_external_url": true,
+        "author": "",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Added \"Party Hat\" and \"Noise Maker - TF Birthday\" item grants to players who don't already have them during TF2's birthday ;* Fixed some classes not...",
+        "feedlabel": "TF2 Blog",
+        "date": 1471991760,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "252586225988547728",
+        "title": "Insomnia58 ",
+        "url": "http://store.steampowered.com/news/externalpost/tf2_blog/252586225988547728",
+        "is_external_url": true,
+        "author": "",
+        "contents": "<a href=\"https://insomniagamingfestival.com/\"> </a> The <a href=\"https://insomniagamingfestival.com/\">Multiplay Insomnia Gaming Festival</a> is one of the biggest annual gaming tournaments, not to mention one of the highest profile TF2 competitions in the world. This year boasts being the biggest one yet! Featuring GAME Fest for the first time, the show and the expo halls will be open an extra day...",
+        "feedlabel": "TF2 Blog",
+        "date": 1471901700,
+        "feedname": "tf2_blog"
+      },
+      {
+        "gid": "252586225977787797",
+        "title": "Team Fortress 2 Update Released",
+        "url": "http://store.steampowered.com/news/23654/",
+        "is_external_url": false,
+        "author": "Valve",
+        "contents": "An update to Team Fortress 2 has been released. The update will be applied automatically when you restart Team Fortress 2. The major changes include: * Fixed a common server crash that primarily occurred during Mann vs. Machine matches; * Fixed a memory leak for OS X and Linux clients; ",
+        "feedlabel": "Product Update",
+        "date": 1471644660,
+        "feedname": "steam_updates"
+      }
+    ]
+
+  }
+}

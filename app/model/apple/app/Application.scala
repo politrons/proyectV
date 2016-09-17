@@ -1,4 +1,4 @@
-package model.app
+package model.apple.app
 
 /**
   * Created by pabloperezgarcia on 29/8/16.

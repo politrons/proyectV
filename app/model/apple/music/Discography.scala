@@ -1,4 +1,4 @@
-package model.music
+package model.apple.music
 
 import factories.{AlbumFactory, VideoClip}
 import implicits.Utils.anyUtils

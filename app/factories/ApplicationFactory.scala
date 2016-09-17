@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.app.Application
+import model.apple.app.Application
 
 import scala.util.parsing.json.JSONObject
 

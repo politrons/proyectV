@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.music.VideoClip
+import model.apple.music.VideoClip
 
 import scala.util.parsing.json.JSONObject
 

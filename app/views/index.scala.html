@@ -11,13 +11,13 @@
     }
     <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
 
-    @form(action = routes.BaseController.application()) {
+    @form(action = routes.AppleController.application()) {
         <button class="search">Apps</button>
     }
-    @form(action = routes.BaseController.discography()) {
+    @form(action = routes.AppleController.discography()) {
         <button class="search">Music</button>
     }
-    @form(action = routes.BaseController.movie()) {
+    @form(action = routes.AppleController.movie()) {
         <button class="search">Movies</button>
     }
 </body>

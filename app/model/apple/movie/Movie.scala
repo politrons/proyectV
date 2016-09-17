@@ -1,4 +1,4 @@
-package model.movie
+package model.apple.movie
 
 /**
   * Created by pabloperezgarcia on 29/8/16.

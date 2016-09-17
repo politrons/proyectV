@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.music.Album
+import model.apple.music.Album
 
 import scala.util.parsing.json.JSONObject
 

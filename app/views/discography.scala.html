@@ -1,11 +1,11 @@
-@import model.music.Album
+@import model.apple.music.Album
 @import views.html.helper.form
 @(albums: List[Album])
 @main("Welcome to Project Video") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
         <img class="itunes_logo" src="@routes.Assets.at("images/itunes.png")">
-        @form(action = routes.BaseController.discography) {
+        @form(action = routes.AppleController.discography) {
         <input type="input" class="search_field" name="artist">
         <input type="submit" class="search" value="search">
         @for((album, index) <- albums.zipWithIndex) {

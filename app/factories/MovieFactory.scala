@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.movie.Movie
+import model.apple.movie.Movie
 
 import scala.util.parsing.json.JSONObject
 

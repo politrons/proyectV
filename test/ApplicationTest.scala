@@ -1,7 +1,7 @@
 import factories.ApplicationFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.AppleStoreMock
-import model.app.AppleStore
+import model.apple.app.AppleStore
 import org.junit.Test
 
 /**

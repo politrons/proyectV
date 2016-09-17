@@ -1,4 +1,4 @@
-package model.app
+package model.apple.app
 
 import factories.ApplicationFactory
 import implicits.Utils.anyUtils

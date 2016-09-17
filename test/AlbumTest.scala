@@ -1,7 +1,7 @@
 import factories.AlbumFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.ItunesMock
-import model.music.Discography
+import model.apple.music.Discography
 import org.junit.Test
 /**
   * Created by pabloperezgarcia on 18/8/16.

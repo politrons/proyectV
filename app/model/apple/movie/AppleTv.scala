@@ -1,4 +1,4 @@
-package model.movie
+package model.apple.movie
 
 import factories.MovieFactory
 import implicits.Utils.anyUtils

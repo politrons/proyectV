@@ -1,4 +1,4 @@
-package model.music
+package model.apple.music
 
 /**
   * Created by pabloperezgarcia on 27/8/16.
