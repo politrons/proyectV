@@ -2,12 +2,13 @@
 
 @(message: String)
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
-@form(action = routes.BaseController.selectCountry) {
-    <button name="country" value="us"><img src="@routes.Assets.at("images/us-flag.GIF")"/></button>
-    <button name="country" value="es"><img src="@routes.Assets.at("images/flag-es.gif")" /></button>
-    <button name="country" value="uk"><img src="@routes.Assets.at("images/flag-uk.jpg")"/></button>
-}
+
 <body background="@routes.Assets.at("images/background.jpg")">
+    @form(action = routes.BaseController.selectCountry) {
+        <button class="us-flag" name="country" value="us"><img src="@routes.Assets.at("images/us-flag.GIF")"/></button>
+        <button class="es-flag" name="country" value="es"><img src="@routes.Assets.at("images/flag-es.gif")" /></button>
+        <button class="uk-flag" name="country" value="gb"><img src="@routes.Assets.at("images/flag-uk.jpg")"/></button>
+    }
     <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
 
     @form(action = routes.BaseController.application()) {
@@ -32,5 +33,30 @@ height: 130px ;
 position: relative ;
 left: 270px ;
 top: 50px ;
+}
+
+.us-flag {
+position: relative;
+left: 1070px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+.es-flag {
+position: relative;
+left: 930px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+.uk-flag {
+position: relative;
+left: 1000px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
 }
 </style>
