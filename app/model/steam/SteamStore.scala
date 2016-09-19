@@ -1,7 +1,7 @@
 package model.steam
 
 import factories.GameFactory
-import implicits.Utils.anyUtils
+import implicits.Utils.{anyUtils, jsonArrayUtils, optionUtils}
 
 import scala.util.parsing.json.{JSONArray, JSONObject}
 
@@ -10,19 +10,38 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
   */
 object SteamStore {
 
-  def games(jsonArray: JSONArray): List[Game] = {
-    var games: List[Game] = List()
+  def game(gameId: String, jsonArray: JSONArray): Game = {
+    // _ initialize in the default value of type, Int -> 0 reference instance null
+    var game: Game = null
+    val json = jsonArray.asFirstStringMap
+    try {
+      game = GameFactory.create(new JSONObject(getJsonGame(gameId, json)))
+    } catch {
+      case e: NoSuchElementException => {
+        println(s"Error adding app:$json")
+      }
+    }
+    game
+  }
+
+  def getJsonGame(gameId: String, json: Map[String, Any]): Map[String, Any] = {
+    val jsonData = json.get(gameId).asStringMap
+    jsonData.get("data").asStringMap
+  }
+
+  def gamesIds(jsonArray: JSONArray): List[GameId] = {
+    var gamesId: List[GameId] = List()
     jsonArray.list foreach (json => {
       try {
-        val game = GameFactory.create(new JSONObject(json.asStringMap))
-        games = games ++ List(game)
+        val gameId = GameFactory.createId(new JSONObject(json.asStringMap))
+        gamesId = gamesId ++ List(gameId)
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding app:$json")
         }
       }
     })
-    games
+    gamesId
   }
 
 }

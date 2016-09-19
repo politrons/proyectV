@@ -12,7 +12,7 @@ class ApplicationTest {
   @Test def testApplication(): Unit = {
     val jsonArray = AppleStoreMock.mockApps()
     val apps = AppleStore.applications(jsonArray)
-    val app = ApplicationFactory.create(jsonArray.firstJson)
+    val app = ApplicationFactory.create(jsonArray.first)
     assert(app != null)
     assert(apps.head.artistName.equals("Top Free Games"))
 

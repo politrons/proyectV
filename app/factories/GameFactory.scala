@@ -1,7 +1,7 @@
 package factories
 
 import implicits.Utils.optionUtils
-import model.steam.Game
+import model.steam.{GameId, Game}
 
 import scala.util.parsing.json.JSONObject
 
@@ -11,17 +11,20 @@ import scala.util.parsing.json.JSONObject
   */
 object GameFactory {
 
-
   def create(json: JSONObject): Game = {
     new Game(
-      json.obj.get("gid").asString,
-      json.obj.get("title").asString,
-      json.obj.get("url").asString,
-      json.obj.get("author").asString,
-      json.obj.get("contents").asString,
-      json.obj.get("feedlabel").asString,
-      json.obj.get("feedname").asString
-    )
+      json.obj.get("steam_appid").asString,
+      json.obj.get("name").asString,
+      json.obj.get("detailed_description").asString,
+      json.obj.get("supported_languages").asString,
+      json.obj.get("header_image").asString,
+      json.obj.get("background").asString,
+      json.obj.get("website").asString)
+  }
+
+  def createId(json: JSONObject): GameId = {
+    new GameId(
+      String.valueOf(json.obj.get("appid").toInt))
   }
 
 

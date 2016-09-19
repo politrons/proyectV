@@ -12,7 +12,7 @@ class MovieTest {
   @Test def testMovie(): Unit = {
     val jsonArray = AppleTvMock.mockApps()
     val movies = AppleStore.applications(jsonArray)
-    val movie = MovieFactory.create(jsonArray.firstJson)
+    val movie = MovieFactory.create(jsonArray.first)
     assert(movie != null)
     assert(movies.head.artistName.equals("Top Free Games"))
 

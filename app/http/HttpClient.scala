@@ -16,7 +16,7 @@ object HttpClient extends HttpExtensions {
     )
   }
 
-  def post(url: String, function:HttpRequest=>JSONArray, protocol: String = "http") {
+  def post(url: String, function:(HttpRequest)=>JSONArray, protocol: String = "http") {
     lastResponse = Some(
       Http(s"$protocol://$url").option(HttpOptions.allowUnsafeSSL)
         .timeout(connTimeoutMs = CONNECT_TIMEOUT, readTimeoutMs = READ_TIMEOUT)
