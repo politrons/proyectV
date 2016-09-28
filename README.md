@@ -1,9 +1,9 @@
-Author Jérémie Grienenberger &  Pablo Perez Garcia 
+Author  Pablo Perez Garcia 
 
-# Proyect V
+# Project media
 
-Project to continue learning  Scala and playFramework 
+Project that consume the Apple and Steam API for now.
 
 To run the service, just need to run the Play2Run and then automatically the Service will open main page
 
-* Music search on itunes  http://localhost:9000/search
+* Music search on itunes  http://localhost:9000/
