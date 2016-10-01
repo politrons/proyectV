@@ -2,7 +2,6 @@ package implicits
 
 import play.api.cache.CacheApi
 
-import scala.reflect.ClassTag
 import scala.util.parsing.json.{JSONArray, JSONObject}
 
 /**
@@ -34,8 +33,12 @@ object Utils {
     def asStringMap: Map[String, Any] = jsonObject.obj
   }
 
-  implicit class cacheUtils[T: ClassTag](cache: CacheApi) {
-    def getVal(key: String): T = cache.get(key).get
+  implicit class cacheUtils[T](cache: CacheApi) {
+
+    def getVal[T](key: String): T = cache.get(key).get
+
+    def jsonArraySize(key:String): Int = getVal[JSONArray](key).list.size
+
   }
 
 }

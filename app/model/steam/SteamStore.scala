@@ -29,9 +29,9 @@ object SteamStore {
     jsonData.get("data").asStringMap
   }
 
-  def gamesIds(jsonArray: JSONArray): List[GameId] = {
+  def gamesIds(jsonArray: JSONArray, from: Int, to: Int): List[GameId] = {
     var gamesId: List[GameId] = List()
-    jsonArray.list foreach (json => {
+    jsonArray.list.slice(from, to) foreach (json => {
       try {
         val gameId = GameFactory.createId(new JSONObject(json.asStringMap))
         gamesId = gamesId ++ List(gameId)
