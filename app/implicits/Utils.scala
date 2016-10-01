@@ -10,19 +10,17 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
   */
 object Utils {
 
-
   implicit class anyUtils(any: Any) {
     def asStringMap: Map[String, Any] = any.asInstanceOf[Map[String, Any]]
   }
 
-
   implicit class optionUtils(o: Option[Any]) {
+
     def asString: String = String.valueOf(o.get)
 
     def toInt: Int = o.get.asInstanceOf[Double].toInt
 
     def asStringMap: Map[String, Any] = o.get.asInstanceOf[Map[String, Any]]
-
   }
 
   implicit class jsonArrayUtils(jsonArray: JSONArray) {

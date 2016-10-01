@@ -25,20 +25,32 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
     if (artist.isEmpty) {
       Ok(html.discography(Discography.albums(new JSONArray(List()))))
     } else {
-      val cacheKey = artist.asString + "-" + country
-      var albums: List[Album] = List()
-      val albumsCached = cache.get(cacheKey)
-      if (albumsCached.isEmpty) {
-        get(s"$appleAPI${artist.get.replace(" ", "+")}", asJson, "https")
-        albums = Discography.albums(lastResponse.get)
-        get(s"$appleAPI${artist.get.replace(" ", "+").concat(s"&country=$country&entity=musicVideo")}", asJson, "https")
-        Discography.attachVideos(lastResponse.get, albums)
-        cache.set(cacheKey, albums, 5.minutes)
-      } else {
-        albums = albumsCached.get
-      }
-      Ok(html.discography(albums))
+      Ok(html.discography(getDiscography(artist)))
     }
+  }
+
+  private def getDiscography(artist:Option[String]): List[Album] = {
+    val cacheKey = artist.asString + "-" + country
+    var albums: List[Album] = List()
+    val albumsCached = cache.get(cacheKey)
+    if (albumsCached.isEmpty) {
+      albums = findAlbums(artist)
+      attachVideoClips(artist, albums)
+      cache.set(cacheKey, albums, 5.minutes)
+    } else {
+      albums = albumsCached.get
+    }
+    albums
+  }
+
+  private def attachVideoClips(artist: Option[String], albums: List[Album]): List[Album] = {
+    get(s"$appleAPI${artist.get.replace(" ", "+").concat(s"&country=$country&entity=musicVideo")}", asJson, "https")
+    Discography.attachVideos(lastResponse.get, albums)
+  }
+
+  private def findAlbums(artist: Option[String]): List[Album] = {
+    get(s"$appleAPI${artist.get.replace(" ", "+")}", asJson, "https")
+    Discography.albums(lastResponse.get)
   }
 
   def application = Action { implicit request =>
@@ -46,40 +58,54 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
     if (app.isEmpty) {
       Ok(html.application(AppleStore.applications(new JSONArray(List()))))
     } else {
-      val cacheKey = app.asString + "-" + country
-      var apps: List[Application] = List()
-      val appsCached = cache.get(cacheKey)
-      if (appsCached.isEmpty) {
-        get(s"$appleAPI${app.get.replace(" ", "+").concat(s"&country=$country&entity=software")}", asJson, "https")
-        apps = AppleStore.applications(lastResponse.get)
-        cache.set(cacheKey, apps, 5.minutes)
-      } else {
-        apps = appsCached.get
-      }
-      Ok(html.application(apps))
-
+      Ok(html.application(getApplications(app)))
     }
+  }
+
+  private def getApplications(app:Option[String]): List[Application] = {
+    val cacheKey = app.asString + "-" + country
+    var apps: List[Application] = List()
+    val appsCached = cache.get(cacheKey)
+    if (appsCached.isEmpty) {
+      apps = findApps(app)
+      cache.set(cacheKey, apps, 5.minutes)
+    } else {
+      apps = appsCached.get
+    }
+    apps
+  }
+
+  private def findApps(app: Option[String]): List[Application] = {
+    get(s"$appleAPI${app.get.replace(" ", "+").concat(s"&country=$country&entity=software")}", asJson, "https")
+    AppleStore.applications(lastResponse.get)
   }
 
   def movie = Action { implicit request =>
-    val movie: Option[String] = request.getQueryString("movie")
-    if (movie.isEmpty) {
+    val title: Option[String] = request.getQueryString("movie")
+    if (title.isEmpty) {
       Ok(html.movie(AppleTv.movies(new JSONArray(List()))))
     } else {
-      val cacheKey = movie.asString + "-" + country
-      var movies: List[Movie] = List()
-      val moviesCached = cache.get(cacheKey)
-      if (moviesCached.isEmpty) {
-        get(s"$appleAPI${movie.get.replace(" ", "+").concat(s"&country=$country&entity=movie")}", asJson, "https")
-        movies = AppleTv.movies(lastResponse.get)
-        cache.set(cacheKey, movies, 5.minutes)
-      } else {
-        movies = moviesCached.get
-      }
-      Ok(html.movie(movies))
+      Ok(html.movie(getMovies(title)))
     }
   }
 
+  private def getMovies(title:Option[String]): List[Movie] = {
+    var movies: List[Movie] = List()
+    val cacheKey = title.asString + "-" + country
+    val moviesCached = cache.get(cacheKey)
+    if (moviesCached.isEmpty) {
+      movies =  findMovies(title)
+      cache.set(cacheKey, movies, 5.minutes)
+    } else {
+      movies = moviesCached.get
+    }
+    movies
+  }
+
+  def findMovies(movie: Option[String]): List[Movie] = {
+    get(s"$appleAPI${movie.get.replace(" ", "+").concat(s"&country=$country&entity=movie")}", asJson, "https")
+    AppleTv.movies(lastResponse.get)
+  }
 
   def asJson: (HttpRequest) => JSONArray = {
     request =>

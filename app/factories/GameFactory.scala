@@ -24,7 +24,8 @@ object GameFactory {
 
   def createId(json: JSONObject): GameId = {
     new GameId(
-      String.valueOf(json.obj.get("appid").toInt))
+      String.valueOf(json.obj.get("appid").toInt),
+      String.valueOf(json.obj.get("name")))
   }
 
 
