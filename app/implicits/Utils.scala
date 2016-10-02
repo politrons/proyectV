@@ -27,6 +27,7 @@ object Utils {
     def first: JSONObject = new JSONObject(jsonArray.list.head.asInstanceOf[Map[String, Any]])
 
     def asFirstStringMap: Map[String, Any] = jsonArray.list.head.asInstanceOf[Map[String, Any]]
+
   }
 
   implicit class jsonObjectUtils(jsonObject: JSONObject) {

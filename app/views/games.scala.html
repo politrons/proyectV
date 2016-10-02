@@ -2,35 +2,33 @@
 @import views._
 
 @(games: List[GameId], messageCount: Int)
-@main("Welcome to Project Video") {
+@main("Welcome to Project Video", "/") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
-    @for((game, index) <- games.zipWithIndex) {
-        <table class="mainTable">
-            <tr>
-                <td>
-                    <label>@game.name</label>
-                </td>
-
-            </tr>
-        </table>
-        <hr>
-        }
+        <div class="mainTable">
+            <table >
+            @for((game, index) <- games.zipWithIndex) {
+                <tr>
+                    <td>
+                        <label></label>
+                        <a class="gameId" href="gameDetails?gameId=@game.appid">@game.name</a>
+                    </td>
+                </tr>
+            }
+            </table>
+            @html.pagination("index", messageCount / 10, "games")
+        </div>
     </body>
-
-    @html.pagination("index", messageCount / 10, "games")
 }
 
 <style>
-.itunes_logo {
-border-bottom-right-radius: 10px ;
-border-bottom-left-radius: 10px ;
-border-top-left-radius: 10px ;
-border-top-right-radius: 10px ;
-width: 100px ;
-height: 100px ;
+.mainTable {
 position: relative ;
-left: 530px ;
-top: 40px ;
+top:30px
+}
+
+.gameId {
+
+
 }
 </style>

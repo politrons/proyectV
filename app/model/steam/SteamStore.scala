@@ -41,7 +41,7 @@ object SteamStore {
         }
       }
     })
-    gamesId
+    gamesId.sortBy(_.name )
   }
 
 }

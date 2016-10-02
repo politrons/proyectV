@@ -1,7 +1,7 @@
 @import model.apple.movie.Movie
 @import views.html.helper.form
 @(movies: List[Movie])
-@main("Welcome to Project Video") {
+@main("Welcome to Project Video","/") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
     <body background="@routes.Assets.at("images/background.jpg")">
         <img class="apple_tv_logo" src="@routes.Assets.at("images/logo-appletv.png")">

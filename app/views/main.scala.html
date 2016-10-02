@@ -1,31 +1,29 @@
-@(title: String)(content: Html)
-    @import views.html.helper.form
+@(title: String, backPage: String)(content: Html)
 <!DOCTYPE html>
 
-    <html>
-        <head>
-            <title>@title</title>
-            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-            <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-            <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
-        </head>
-        @form(action = routes.BaseController.index()) {
-            <button class="back_button">Back</button>
-        }
-        @content
-    </html>
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    </head>
+    <a class="back_button" href="@backPage">
+        <img class="back_button" src="@routes.Assets.at("images/back.png")">
+    </a>
+    @content
+</html>
 
 
 <style>
-    .back_button {
-    background-color: #e6fdfd ;
-    border-bottom-right-radius: 10px ;
-    border-bottom-left-radius: 10px ;
-    border-top-left-radius: 10px ;
-    border-top-right-radius: 10px ;
-    position: relative ;
-    left: 5px ;
-    top: 5px ;
-    width: 80px ;
-    }
+.back_button {
+border-bottom-right-radius: 10px ;
+border-bottom-left-radius: 10px ;
+border-top-left-radius: 10px ;
+border-top-right-radius: 10px ;
+position: relative ;
+left: 5px ;
+top: 5px ;
+width: 50px ;
+}
 </style>

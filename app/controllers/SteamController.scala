@@ -4,6 +4,7 @@ import javax.inject.Inject
 
 import exceptions.HttpResponseException
 import http.HttpClient._
+import implicits.Utils.cacheUtils
 import model.steam.{GameId, SteamStore}
 import play.api.cache._
 import play.api.mvc._
@@ -11,9 +12,7 @@ import views.html
 
 import scala.concurrent.duration._
 import scala.util.parsing.json._
-import scalaj.http.{HttpRequest, HttpResponse}
-
-import implicits.Utils.cacheUtils
+import scalaj.http.{HttpResponse, HttpRequest}
 
 
 class SteamController @Inject()(cache: CacheApi) extends BaseController {
@@ -31,10 +30,10 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
     if (fromRequest.isEmpty) {
       fromRequest = Option("0")
     }
-    val from = Integer.parseInt(fromRequest.get) * 10
-    val to = from + 10
+    val from = Integer.parseInt(fromRequest.get) * 20
+    val to = from + 20
     loadGameIds()
-    Ok(html.games(getGamesIds(from, to), cache.jsonArraySize(GAME_KEY)/10))
+    Ok(html.games(getGamesIds(from, to), cache.jsonArraySize(GAME_KEY) / 10))
   }
 
   private def getGamesIds(from: Int, to: Int): List[GameId] = {
@@ -49,28 +48,12 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
     }
   }
 
-  //  def gameDetails = Action { implicit request =>
-  //    get(s"$gameIdsListAPI", asJsonGamesId)
-  //    val gamesIds = SteamStore.gamesIds(lastResponse.get)
-  //    var games: List[Game] = List()
-  //    var index = 0 //TODO:Pagination it´ needed
-  //    breakable {
-  //      gamesIds foreach (gameId => {
-  //        try {
-  //          get(s"$gameAPI${gameId.appid}&maxlength=300&format=json", asJsonGame)
-  //          val game = SteamStore.game(gameId.appid, lastResponse.get)
-  //          games = games ++ List(game)
-  //          index += 1
-  //          if (index == 20) break //TODO:Change this by pagination
-  //        } catch {
-  //          case e: Exception => {
-  //            println(s"Error getting game:${gameId.appid}")
-  //          }
-  //        }
-  //      })
-  //    }
-  //    Ok(html.games(games))
-  //  }
+  def gameDetails = Action { implicit request =>
+    val gameId = request.getQueryString("gameId")
+    get(s"$GAME_API${gameId.get}&maxlength=300&format=json", asJsonGame)
+    val game = SteamStore.game(gameId.get, lastResponse.get)
+    Ok(html.gameDetail(game))
+  }
 
   //  def findHardware(): { implicit request =>
 

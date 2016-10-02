@@ -9,8 +9,11 @@ class Game(val steam_appid: String,
            val supported_languages: String,
            val header_image: String,
            val background: String,
-           val website: String) {}
-
-
+           val website: String,
+           val currency: String,
+           val price:String,
+           val date:String,
+           val developers:String,
+           val publishers:String) {}
 
 
