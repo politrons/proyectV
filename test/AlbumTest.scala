@@ -12,7 +12,7 @@ class AlbumTest {
     val jsonArray = ItunesMock.mockMusic()
     val albums = Discography.albums(jsonArray)
     val album = AlbumFactory.create(jsonArray.first)
-    val mergedAlbums = Discography.mergeAlbum(album, albums)
+    val mergedAlbums = Discography.isAlbumMerged(album, albums)
     assert(mergedAlbums)
     assert(albums.head.songs.size == 16)
 

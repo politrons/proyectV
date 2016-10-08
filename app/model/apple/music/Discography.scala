@@ -16,8 +16,8 @@ object Discography {
       val jsonAlbum = new JSONObject(json.asStringMap)
       try {
         val album = AlbumFactory.create(jsonAlbum)
-        if (!mergeAlbum(album, albums)) {
-          albums = albums ++ List(album)
+        if (!isAlbumMerged(album, albums)) {
+          albums = album :: albums
         }
       } catch {
         case e: NoSuchElementException => {
@@ -32,8 +32,7 @@ object Discography {
     videosArray.list foreach (json => {
       val jsonVideo = new JSONObject(json.asStringMap)
       try {
-        val videoClip = VideoClip.create(jsonVideo)
-        mergeVideoClips(videoClip, albums)
+        mergeVideoClips(VideoClip.create(jsonVideo), albums)
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding album:$jsonVideo")
@@ -43,7 +42,7 @@ object Discography {
     albums
   }
 
-  def mergeAlbum(newAlbum: Album, albums: List[Album]): Boolean = {
+  def isAlbumMerged(newAlbum: Album, albums: List[Album]): Boolean = {
     var found = false
     albums.toStream
       .filter(album => isSameAlbum(newAlbum, album))

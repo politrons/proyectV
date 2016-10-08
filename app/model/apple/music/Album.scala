@@ -1,19 +1,21 @@
 package model.apple.music
 
+import model.apple.AppleBase
+
 /**
   * Created by pabloperezgarcia on 27/8/16.
   */
-class Album(val artistName: String,
+class Album(artistName: String,
             val collectionName: String,
             val primaryGenreName: String,
             val country: String,
             val trackPrice: String,
             val trackViewUrl: String,
             val releaseDate: String,
-            val trackName: String,
+            trackName: String,
             val previewUrl: String,
             val artWorkUrl: String
-           ) {
+           ) extends AppleBase(artistName, trackName) {
 
   var songs: List[Song] = List(new Song(trackName, previewUrl, trackPrice, trackViewUrl))
 

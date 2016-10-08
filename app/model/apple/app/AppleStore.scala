@@ -10,12 +10,11 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
   */
 object AppleStore {
 
-  def applications(jsonArray: JSONArray): List[Application] = {
+  def applications(applicationsArray: JSONArray): List[Application] = {
     var applications: List[Application] = List()
-    jsonArray.list foreach (json => {
+    applicationsArray.list foreach (json => {
       try {
-        val application = ApplicationFactory.create(new JSONObject(json.asStringMap))
-        applications = applications ++ List(application)
+        applications = ApplicationFactory.create(new JSONObject(json.asStringMap)) :: applications
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding app:$json")

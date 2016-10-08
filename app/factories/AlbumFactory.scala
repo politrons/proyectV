@@ -11,7 +11,6 @@ import scala.util.parsing.json.JSONObject
   */
 object AlbumFactory {
 
-
   def create(json: JSONObject): Album = {
     new Album(
       json.obj.get("artistName").asString,

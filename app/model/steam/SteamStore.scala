@@ -34,14 +34,14 @@ object SteamStore {
     jsonArray.list.slice(from, to) foreach (json => {
       try {
         val gameId = GameFactory.createId(new JSONObject(json.asStringMap))
-        gamesId = gamesId ++ List(gameId)
+        gamesId = gameId :: gamesId
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding app:$json")
         }
       }
     })
-    gamesId.sortBy(_.name )
+    gamesId.sortBy(_.name)
   }
 
 }

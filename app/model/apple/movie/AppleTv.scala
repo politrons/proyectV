@@ -10,12 +10,11 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
   */
 object AppleTv {
 
-  def movies(jsonArray: JSONArray): List[Movie] = {
+  def movies(moviesArray: JSONArray): List[Movie] = {
     var movies: List[Movie] = List()
-    jsonArray.list foreach (json => {
+    moviesArray.list foreach (json => {
       try {
-        val movie = MovieFactory.create(new JSONObject(json.asStringMap))
-        movies = movies ++ List(movie)
+        movies = MovieFactory.create(new JSONObject(json.asStringMap)) :: movies
       } catch {
         case e: NoSuchElementException => {
           println(s"Error adding movie:$json")
