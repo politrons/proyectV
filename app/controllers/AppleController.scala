@@ -22,23 +22,23 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
 
   def discography = Action { implicit request =>
     val artist: Option[String] = request.getQueryString("artist")
-    if (artist.isEmpty) {
-      Ok(html.discography(Discography.albums(new JSONArray(List()))))
-    } else {
-      Ok(html.discography(getDiscography(artist)))
+    artist.isEmpty match {
+      case true => Ok(html.discography(Discography.albums(new JSONArray(List()))))
+      case _ => Ok(html.discography(getDiscography(artist)))
     }
   }
 
-  private def getDiscography(artist:Option[String]): List[Album] = {
+  private def getDiscography(artist: Option[String]): List[Album] = {
     val cacheKey = artist.asString + "-" + country
     var albums: List[Album] = List()
     val albumsCached = cache.get(cacheKey)
-    if (albumsCached.isEmpty) {
-      albums = findAlbums(artist)
-      attachVideoClips(artist, albums)
-      cache.set(cacheKey, albums, 5.minutes)
-    } else {
-      albums = albumsCached.get
+    albumsCached.isEmpty match {
+      case true => {
+        albums = findAlbums(artist)
+        attachVideoClips(artist, albums)
+        cache.set(cacheKey, albums, 5.minutes)
+      }
+      case _ => albums = albumsCached.get
     }
     albums
   }
@@ -55,22 +55,22 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
 
   def application = Action { implicit request =>
     val app: Option[String] = request.getQueryString("app")
-    if (app.isEmpty) {
-      Ok(html.application(AppleStore.applications(new JSONArray(List()))))
-    } else {
-      Ok(html.application(getApplications(app)))
+    app.isEmpty match {
+      case true => Ok(html.application(AppleStore.applications(new JSONArray(List()))))
+      case _ => Ok(html.application(getApplications(app)))
     }
   }
 
-  private def getApplications(app:Option[String]): List[Application] = {
+  private def getApplications(app: Option[String]): List[Application] = {
     val cacheKey = app.asString + "-" + country
     var apps: List[Application] = List()
     val appsCached = cache.get(cacheKey)
-    if (appsCached.isEmpty) {
-      apps = findApps(app)
-      cache.set(cacheKey, apps, 5.minutes)
-    } else {
-      apps = appsCached.get
+    appsCached.isEmpty match {
+      case true => {
+        apps = findApps(app)
+        cache.set(cacheKey, apps, 5.minutes)
+      }
+      case _ => apps = appsCached.get
     }
     apps
   }
@@ -82,22 +82,22 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
 
   def movie = Action { implicit request =>
     val title: Option[String] = request.getQueryString("movie")
-    if (title.isEmpty) {
-      Ok(html.movie(AppleTv.movies(new JSONArray(List()))))
-    } else {
-      Ok(html.movie(getMovies(title)))
+    title.isEmpty match {
+      case true => Ok(html.movie(AppleTv.movies(new JSONArray(List()))))
+      case _ => Ok(html.movie(getMovies(title)))
     }
   }
 
-  private def getMovies(title:Option[String]): List[Movie] = {
+  private def getMovies(title: Option[String]): List[Movie] = {
     var movies: List[Movie] = List()
     val cacheKey = title.asString + "-" + country
     val moviesCached = cache.get(cacheKey)
-    if (moviesCached.isEmpty) {
-      movies =  findMovies(title)
-      cache.set(cacheKey, movies, 5.minutes)
-    } else {
-      movies = moviesCached.get
+    moviesCached.isEmpty match {
+      case true => {
+        movies = findMovies(title)
+        cache.set(cacheKey, movies, 5.minutes)
+      }
+      case _ => movies = moviesCached.get
     }
     movies
   }
@@ -110,13 +110,14 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
   def asJson: (HttpRequest) => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
-      if (response.isSuccess) {
-        val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-        val jsonList = map.get("results").get.asInstanceOf[List[Map[String, Any]]]
-        new JSONArray(jsonList)
+      response.isSuccess match {
+        case true => {
+          val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
+          val jsonList = map.get("results").get.asInstanceOf[List[Map[String, Any]]]
+          new JSONArray(jsonList)
+        }
+        case _ => throw new HttpResponseException(s"Error: $response")
       }
-      else
-        throw new HttpResponseException(s"Error: $response")
   }
 
 }

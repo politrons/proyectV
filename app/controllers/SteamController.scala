@@ -12,7 +12,7 @@ import views.html
 
 import scala.concurrent.duration._
 import scala.util.parsing.json._
-import scalaj.http.{HttpResponse, HttpRequest}
+import scalaj.http.{HttpRequest, HttpResponse}
 
 
 class SteamController @Inject()(cache: CacheApi) extends BaseController {
@@ -91,25 +91,28 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
   def asJsonGamesId: (HttpRequest) => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
-      if (response.isSuccess) {
-        val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-        val jsonMap = map.get("applist").get.asInstanceOf[Map[String, Any]]
-        val jsonList = jsonMap.get("apps").get.asInstanceOf[List[Map[String, Any]]]
-        new JSONArray(jsonList)
+      response.isSuccess match {
+        case true => {
+          val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
+          val jsonMap = map.get("applist").get.asInstanceOf[Map[String, Any]]
+          val jsonList = jsonMap.get("apps").get.asInstanceOf[List[Map[String, Any]]]
+          new JSONArray(jsonList)
+        }
+        case _ => throw new HttpResponseException(s"Error: $response")
       }
-      else
-        throw new HttpResponseException(s"Error: $response")
+
   }
 
   def asJsonGame: (HttpRequest) => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
-      if (response.isSuccess) {
-        val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-        new JSONArray(List(map))
+      response.isSuccess match {
+        case true => {
+          val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
+          new JSONArray(List(map))
+        }
+        case _ => throw new HttpResponseException(s"Error: $response")
       }
-      else
-        throw new HttpResponseException(s"Error: $response")
   }
 
 }
