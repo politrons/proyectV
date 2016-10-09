@@ -11,17 +11,16 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
 object AppleTv {
 
   def movies(moviesArray: JSONArray): List[Movie] = {
-    var movies: List[Movie] = List()
-    moviesArray.list foreach (json => {
-      try {
-        movies = MovieFactory.create(new JSONObject(json.asStringMap)) :: movies
-      } catch {
-        case e: NoSuchElementException => {
-          println(s"Error adding movie:$json")
+    moviesArray.list.toStream
+      .map(movie => {
+        try {
+          MovieFactory.create(new JSONObject(movie.asStringMap))
+        } catch {
+          case e: NoSuchElementException => null
         }
-      }
-    })
-    movies
+      })
+      .filter(movie => movie != null)
+      .toList
   }
 
 }
