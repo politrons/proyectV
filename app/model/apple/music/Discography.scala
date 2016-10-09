@@ -29,16 +29,15 @@ object Discography {
   }
 
   def attachVideos(videosArray: JSONArray, albums: List[Album]): List[Album] = {
-    videosArray.list foreach (json => {
-      val jsonVideo = new JSONObject(json.asStringMap)
-      try {
-        mergeVideoClips(VideoClip.create(jsonVideo), albums)
-      } catch {
-        case e: NoSuchElementException => {
-          println(s"Error adding album:$jsonVideo")
+    videosArray.list.toStream
+      .map(json=>new JSONObject(json.asStringMap))
+      .foreach(jsonVideo=>{
+        try {
+          mergeVideoClips(VideoClip.create(jsonVideo), albums)
+        } catch {
+          case e: NoSuchElementException => null
         }
-      }
-    })
+      })
     albums
   }
 

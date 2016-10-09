@@ -11,17 +11,11 @@ import scala.util.parsing.json.{JSONArray, JSONObject}
 object SteamStore {
 
   def game(gameId: String, jsonArray: JSONArray): Game = {
-    // _ initialize in the default value of type, Int -> 0 reference instance null
-    var game: Game = null
-    val json = jsonArray.asFirstStringMap
     try {
-      game = GameFactory.create(new JSONObject(getJsonGame(gameId, json)))
+       GameFactory.create(new JSONObject(getJsonGame(gameId, jsonArray.asFirstStringMap)))
     } catch {
-      case e: NoSuchElementException => {
-        println(s"Error adding app:$json")
-      }
+      case e: NoSuchElementException => null
     }
-    game
   }
 
   def getJsonGame(gameId: String, json: Map[String, Any]): Map[String, Any] = {
@@ -30,18 +24,16 @@ object SteamStore {
   }
 
   def gamesIds(jsonArray: JSONArray, from: Int, to: Int): List[GameId] = {
-    var gamesId: List[GameId] = List()
-    jsonArray.list.slice(from, to) foreach (json => {
-      try {
-        val gameId = GameFactory.createId(new JSONObject(json.asStringMap))
-        gamesId = gameId :: gamesId
-      } catch {
-        case e: NoSuchElementException => {
-          println(s"Error adding app:$json")
+    jsonArray.list.slice(from, to).toStream
+      .map(json => {
+        try {
+          GameFactory.createId(new JSONObject(json.asStringMap))
+        } catch {
+          case e: NoSuchElementException => null
         }
-      }
-    })
-    gamesId.sortBy(_.name)
-  }
+      }).filter(gameId => gameId != null)
+      .toList
+      .sortBy(_.name)
+}
 
 }
