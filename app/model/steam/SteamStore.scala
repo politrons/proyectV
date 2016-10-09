@@ -12,7 +12,7 @@ object SteamStore {
 
   def game(gameId: String, jsonArray: JSONArray): Game = {
     try {
-       GameFactory.create(new JSONObject(getJsonGame(gameId, jsonArray.asFirstStringMap)))
+      GameFactory.create(new JSONObject(getJsonGame(gameId, jsonArray.asFirstStringMap)))
     } catch {
       case e: NoSuchElementException => null
     }
@@ -31,9 +31,10 @@ object SteamStore {
         } catch {
           case e: NoSuchElementException => null
         }
-      }).filter(gameId => gameId != null)
+      })
+      .filter(gameId => gameId != null)
       .toList
       .sortBy(_.name)
-}
+  }
 
 }

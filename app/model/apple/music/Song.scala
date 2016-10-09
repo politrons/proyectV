@@ -13,8 +13,9 @@ class Song(trackName: String,
 
   var videoClip: VideoClip = null
 
-  def addVideoClip(videoClip: VideoClip) {
+  def addVideoClip(videoClip: VideoClip): Song = {
     this.videoClip = videoClip
+    this
   }
 
 }

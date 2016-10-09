@@ -29,16 +29,15 @@ object Discography {
   }
 
   def attachVideos(videosArray: JSONArray, albums: List[Album]): List[Album] = {
-    videosArray.list.toStream
-      .map(json=>new JSONObject(json.asStringMap))
-      .foreach(jsonVideo=>{
-        try {
-          mergeVideoClips(VideoClip.create(jsonVideo), albums)
-        } catch {
-          case e: NoSuchElementException => null
-        }
-      })
-    albums
+    albums.toStream
+      .flatMap(album => album.songs.toStream
+        .flatMap(song => videosArray.list.toStream
+          .map(json => new JSONObject(json.asStringMap))
+          .map(jsonVideo => VideoClip.create(jsonVideo))
+          .filter(video => song.trackName.equals(video.trackName))
+          .map(video => song.addVideoClip(video))
+          .map(song => album.replace(song))))
+      .toList
   }
 
   def isAlbumMerged(newAlbum: Album, albums: List[Album]): Boolean = {
@@ -51,17 +50,6 @@ object Discography {
       })
     found
   }
-
-  def mergeVideoClips(video: VideoClip, albums: List[Album]) {
-    albums foreach (album => {
-      album.songs foreach (song => {
-        if (song.trackName.equals(video.trackName)) {
-          song.addVideoClip(video)
-        }
-      })
-    })
-  }
-
 
   def isSameAlbum(newAlbum: Album, album: Album): Boolean = {
     album.collectionName.equals(newAlbum.collectionName)
