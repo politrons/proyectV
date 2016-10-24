@@ -6,6 +6,7 @@ import exceptions.HttpResponseException
 import http.HttpClient._
 import implicits.Utils.cacheUtils
 import model.steam.{GameId, SteamStore}
+import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
 import views.html
@@ -23,7 +24,7 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
 
   private val GAME_KEY: String = "games"
 
-  loadGameIds()
+//  loadGameIds()
 
   def games = Action { implicit request =>
     var fromRequest = request.getQueryString("from")
@@ -31,9 +32,8 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
       fromRequest = Option("0")
     }
     val from = Integer.parseInt(fromRequest.get) * 20
-    val to = from + 20
     loadGameIds()
-    Ok(html.games(getGamesIds(from, to), cache.jsonArraySize(GAME_KEY) / 10))
+    Ok(html.games(getGamesIds(from, from + 20), cache.jsonArraySize(GAME_KEY) / 10))
   }
 
   private def getGamesIds(from: Int, to: Int): List[GameId] = {
@@ -88,7 +88,7 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
   //  }
 
 
-  def asJsonGamesId: (HttpRequest) => JSONArray = {
+  def asJsonGamesId: HttpRequest => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
       response.isSuccess match {
@@ -103,7 +103,7 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
 
   }
 
-  def asJsonGame: (HttpRequest) => JSONArray = {
+  def asJsonGame: HttpRequest => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
       response.isSuccess match {

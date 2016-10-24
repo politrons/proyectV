@@ -1,40 +1,45 @@
 @import views.html.helper.form
 
-@(message: String)
+@(message: String, userName:String="")
+
 <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
 
 <body background="@routes.Assets.at("images/background.jpg")">
+    @form(action = routes.UserController.create) {
+        <button class="us-flag" name="userName" value="us">userName</button>
+    }
     @form(action = routes.BaseController.selectCountry) {
         <button class="us-flag" name="country" value="us"><img src="@routes.Assets.at("images/us-flag.GIF")"/></button>
         <button class="es-flag" name="country" value="es"><img src="@routes.Assets.at("images/flag-es.gif")" /></button>
         <button class="uk-flag" name="country" value="gb"><img src="@routes.Assets.at("images/flag-uk.jpg")"/></button>
     }
-    <table>
-        <tr>
-          <td class="apple_section">
-              <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
+<table>
+    <tr>
+        <td class="apple_section">
+            <img class="apple_logo" src="@routes.Assets.at("images/apple_logo.gif")">
 
-              @form(action = routes.AppleController.application()) {
-                  <button class="search">Apps</button>
-              }
-              @form(action = routes.AppleController.discography()) {
-                  <button class="search">Music</button>
-              }
-              @form(action = routes.AppleController.movie()) {
-                  <button class="search">Movies</button>
-              }
-          </td>
-            <td class="steam_section">
-                <img class="steam_logo" src="@routes.Assets.at("images/steam.gif")">
+            @form(action = routes.AppleController.application()) {
+                <button class="search">Apps</button>
+            }
+            @form(action = routes.AppleController.discography()) {
+                <button class="search">Music</button>
+            }
+            @form(action = routes.AppleController.movie()) {
+                <button class="search">Movies</button>
+            }
+        </td>
+        <td class="steam_section">
+            <img class="steam_logo" src="@routes.Assets.at("images/steam.gif")">
 
-                @form(action = routes.SteamController.games()) {
-                    <button class="search">games</button>
-                }
-            </td>
+            @form(action = routes.SteamController.games()) {
+                <button class="search">games</button>
+            }
+        </td>
 
-        </tr>
 
-    </table>
+    </tr>
+
+</table>
 
 </body>
 
@@ -45,9 +50,9 @@
 }
 
 .steam_section {
-position: relative;
-left: 400px;
-bottom: 30px;
+position: relative ;
+left: 400px ;
+bottom: 30px ;
 }
 
 .steam_logo {
@@ -75,27 +80,27 @@ top: 50px ;
 }
 
 .us-flag {
-position: relative;
-left: 1070px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+position: relative ;
+left: 1070px ;
+border-bottom-right-radius: 10px ;
+border-bottom-left-radius: 10px ;
+border-top-left-radius: 10px ;
+border-top-right-radius: 10px ;
 }
 .es-flag {
-position: relative;
-left: 930px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+position: relative ;
+left: 930px ;
+border-bottom-right-radius: 10px ;
+border-bottom-left-radius: 10px ;
+border-top-left-radius: 10px ;
+border-top-right-radius: 10px ;
 }
 .uk-flag {
-position: relative;
-left: 1000px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+position: relative ;
+left: 1000px ;
+border-bottom-right-radius: 10px ;
+border-bottom-left-radius: 10px ;
+border-top-left-radius: 10px ;
+border-top-right-radius: 10px ;
 }
 </style>

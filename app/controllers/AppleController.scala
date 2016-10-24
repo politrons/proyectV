@@ -99,12 +99,12 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
     movies
   }
 
-  def findMovies(movie: Option[String]): List[Movie] = {
+  private def findMovies(movie: Option[String]): List[Movie] = {
     get(s"$appleAPI${movie.get.replace(" ", "+").concat(s"&country=$country&entity=movie")}", asJson, "https")
     AppleTv.movies(lastResponse.get)
   }
 
-  def asJson: (HttpRequest) => JSONArray = {
+  private def asJson: (HttpRequest) => JSONArray = {
     request =>
       val response: HttpResponse[String] = request.asString
       response.isSuccess match {
