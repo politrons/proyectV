@@ -23,7 +23,7 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
   def discography = Action { implicit request =>
     val artist: Option[String] = request.getQueryString("artist")
     artist.isEmpty match {
-      case true => Ok(html.discography(Discography.albums(new JSONArray(List()))))
+      case true => Ok(html.discography(Discography.albums(JSONArray(List()))))
       case _ => Ok(html.discography(getDiscography(artist)))
     }
   }
@@ -55,7 +55,7 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
   def application = Action { implicit request =>
     val app: Option[String] = request.getQueryString("app")
     app.isEmpty match {
-      case true => Ok(html.application(AppleStore.applications(new JSONArray(List()))))
+      case true => Ok(html.application(AppleStore.applications(JSONArray(List()))))
       case _ => Ok(html.application(getApplications(app)))
     }
   }
@@ -81,7 +81,7 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
   def movie = Action { implicit request =>
     val title: Option[String] = request.getQueryString("movie")
     title.isEmpty match {
-      case true => Ok(html.movie(AppleTv.movies(new JSONArray(List()))))
+      case true => Ok(html.movie(AppleTv.movies(JSONArray(List()))))
       case _ => Ok(html.movie(getMovies(title)))
     }
   }
@@ -110,8 +110,8 @@ class AppleController @Inject()(cache: CacheApi) extends BaseController {
       response.isSuccess match {
         case true =>
           val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-          val jsonList = map.get("results").get.asInstanceOf[List[Map[String, Any]]]
-          new JSONArray(jsonList)
+          val jsonList = map("results").asInstanceOf[List[Map[String, Any]]]
+          JSONArray(jsonList)
         case _ => throw new HttpResponseException(s"Error: $response")
       }
   }

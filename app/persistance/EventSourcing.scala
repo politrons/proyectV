@@ -21,7 +21,7 @@ object EventSourcing {
   val EVENTS: String = "events"
 
   def initialize(): Unit = {
-    Couchbase.initialize()
+    CouchbaseDAO.init()
   }
 
   /**
@@ -76,6 +76,6 @@ object EventSourcing {
   }
 
   private def applyEvent(user: User, event: EventBase) {
-    eventMapping.get(event.getClass).get.apply(user, event)
+    eventMapping(event.getClass).apply(user, event)
   }
 }

@@ -8,12 +8,12 @@ import rx.Observable
 
 object CouchbaseDAO {
 
-  private var bucket: AsyncBucket = null
+  private var bucket: AsyncBucket = _
 
   /**
     * Initialize the cluster and get the bucket to be used for the API
     */
-  def initialize() = {
+  def init() = {
     if (bucket == null) {
       val cluster = CouchbaseAsyncCluster.create("localhost")
       val bucket = cluster.openBucket("projectV", "politron").toBlocking.first()
