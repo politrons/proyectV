@@ -2,6 +2,9 @@ package events
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type
 import com.fasterxml.jackson.annotation.{JsonSubTypes, JsonTypeInfo}
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 @JsonTypeInfo(
   use = JsonTypeInfo.Id.NAME,
@@ -11,16 +14,12 @@ import com.fasterxml.jackson.annotation.{JsonSubTypes, JsonTypeInfo}
   new Type(value = classOf[UserCreated], name = "created")))
 abstract class EventBase {
 
-//  implicit val formats = org.json4s.DefaultFormats
-
   def encode: String = {
 
-//    val objectMapper = new ObjectMapper with ScalaObjectMapper
-//    objectMapper.registerModule(DefaultScalaModule)
-//
-//    val jsonResponse = objectMapper.writeValueAsString(this)
-//    val jsonResponse = Serialization.write(this)
-//    jsonResponse
-    ""
+    val objectMapper = new ObjectMapper with ScalaObjectMapper
+    objectMapper.registerModule(DefaultScalaModule)
+
+    val jsonResponse = objectMapper.writeValueAsString(this)
+    jsonResponse
   }
 }
