@@ -21,7 +21,7 @@ object EventSourcing {
   val EVENTS: String = "events"
 
   def initialize(): Unit = {
-    initialize()
+    Couchbase.initialize()
   }
 
   /**
