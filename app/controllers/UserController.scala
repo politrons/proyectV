@@ -16,12 +16,17 @@ class UserController @Inject()(cache: CacheApi) extends BaseController {
   eventSourcing.setMapping[UserCreated, User](classOf[UserCreated], (user, evt) => user.loadUserName(evt.userName))
 
   def create = Action { implicit request =>
-    val userName = "politron"
-    val documentId: String = eventSourcing.createDocument(userName)
-    val event = new UserCreated(documentId)
-    eventSourcing.appendEvent(documentId, event)
-    val user = eventSourcing.rehydrateModel(new User(),documentId).asInstanceOf[User]
-    Ok(views.html.index("Your new application is ready.", user.userName))
+    val userName = request.getQueryString("userName")
+    if (userName.isDefined) {
+      val document: JsonDocument = EventSourcing.createDocument(userName.get).toBlocking.first();
+      val event = new UserCreated(document.id())
+      EventSourcing.appendEvent(document.id(), event).toBlocking.first()
+      val user = EventSourcing.getUser(document.id())
+      Ok(views.html.index("Your new application is ready.", user))
+    }else{
+      Ok(views.html.index("Your new application is ready."))
+    }
+
   }
 
   def search = Action { implicit request =>

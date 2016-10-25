@@ -6,59 +6,58 @@
     <body background="@routes.Assets.at("images/background.jpg")">
         <img class="apple_tv_logo" src="@routes.Assets.at("images/logo-appletv.png")">
         @form(action = routes.AppleController.movie()) {
-        <input type="input" class="search_field" name="movie">
-        <input type="submit" class="search" value="search">
-        @for((movie, index) <- movies.zipWithIndex) {
-            <table class="mainTable">
-                <tr>
-                    <td>
-                        <img class="image" src='@movie.artworkUrl'>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Company:@movie.artistName</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Title:@movie.trackName</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <video controls="" class="video">
-                            <source src="@movie.previewUrl" type="video/mp4"/>
-                        </video>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Rent:@movie.trackRentalPrice</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>SD:@movie.trackPrice</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>HD:@movie.collectionHdPrice</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>Genre:@movie.primaryGenreName</label>
-                    </td>
-                </tr>
-            </table>
-            <hr>
-            }
+            <input type="input" class="search_field" name="movie">
+            <input type="submit" class="search" value="search">
+            @for((movie, index) <- movies.zipWithIndex) {
+                <table class="mainTable">
+                    <tr>
+                        <td>
+                            <img class="image" src='@movie.artworkUrl'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Company:@movie.artistName</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Title:@movie.trackName</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <video controls="" class="video">
+                                <source src="@movie.previewUrl" type="video/mp4"/>
+                            </video>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Rent:@movie.trackRentalPrice</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>SD:@movie.trackPrice</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>HD:@movie.collectionHdPrice</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Genre:@movie.primaryGenreName</label>
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                }
 
-    }
+        }
     </body>
-
 
 }
 
