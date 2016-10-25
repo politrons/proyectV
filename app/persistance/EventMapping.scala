@@ -8,7 +8,7 @@ object EventMapping {
 
   val eventMapping = collection.mutable.Map[Class[_ <: EventBase], (User, EventBase) => Unit]()
 
-  setMapping[UserCreated](classOf[UserCreated], (user, evt) => user.loadUserName(evt.userName))
+  setMapping[UserCreated](classOf[UserCreated], (user, evt) => user.loadUserName(evt.userName, evt.password))
 
   private def setMapping[T <: EventBase](clazz: Class[T], fn: (User, T) => Unit) {
     eventMapping += clazz -> fn.asInstanceOf[(User, EventBase) => Unit]
