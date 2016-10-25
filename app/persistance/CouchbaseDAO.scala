@@ -4,6 +4,8 @@ import com.couchbase.client.java.document.JsonDocument
 import com.couchbase.client.java.document.json.JsonObject
 import com.couchbase.client.java.{AsyncBucket, CouchbaseAsyncCluster}
 
+import scalaHydration.PersistenceDAO
+
 
 class CouchbaseDAO extends PersistenceDAO {
 

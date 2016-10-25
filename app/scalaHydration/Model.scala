@@ -1,4 +1,4 @@
-package persistance
+package scalaHydration
 
 /**
   * Created by pabloperezgarcia on 25/10/2016.

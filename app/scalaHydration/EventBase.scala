@@ -1,18 +1,14 @@
-package persistance
+package scalaHydration
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type
-import com.fasterxml.jackson.annotation.{JsonSubTypes, JsonTypeInfo}
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
-import events.UserCreated
 
 @JsonTypeInfo(
-  use = JsonTypeInfo.Id.NAME,
+  use = JsonTypeInfo.Id.CLASS,
   include = JsonTypeInfo.As.PROPERTY,
   property = "type")
-@JsonSubTypes(Array(
-  new Type(value = classOf[UserCreated], name = "created")))
 abstract class EventBase {
 
   def encode: String = {
