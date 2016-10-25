@@ -6,7 +6,6 @@ import exceptions.HttpResponseException
 import http.HttpClient._
 import implicits.Utils.cacheUtils
 import model.steam.{GameId, SteamStore}
-import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
 import views.html
@@ -94,8 +93,8 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
       response.isSuccess match {
         case true => {
           val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-          val jsonMap = map.get("applist").get.asInstanceOf[Map[String, Any]]
-          val jsonList = jsonMap.get("apps").get.asInstanceOf[List[Map[String, Any]]]
+          val jsonMap = map("applist").asInstanceOf[Map[String, Any]]
+          val jsonList = jsonMap("apps").asInstanceOf[List[Map[String, Any]]]
           new JSONArray(jsonList)
         }
         case _ => throw new HttpResponseException(s"Error: $response")
@@ -107,10 +106,9 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
     request =>
       val response: HttpResponse[String] = request.asString
       response.isSuccess match {
-        case true => {
+        case true =>
           val map = util.parsing.json.JSON.parseFull(response.body).get.asInstanceOf[Map[String, Any]]
-          new JSONArray(List(map))
-        }
+          JSONArray(List(map))
         case _ => throw new HttpResponseException(s"Error: $response")
       }
   }

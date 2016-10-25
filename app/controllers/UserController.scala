@@ -19,11 +19,11 @@ class UserController @Inject()(cache: CacheApi) extends BaseController {
     //      fromRequest = Option("0")
     //    }
     val userName = "politron"
-    val document: JsonDocument = EventSourcing.createDocument(userName).toBlocking.first();
+    val document: JsonDocument = EventSourcing.createDocument(userName).toBlocking.first()
     val event = new UserCreated(document.id())
     EventSourcing.appendEvent(document.id(), event).toBlocking.first()
     val user = EventSourcing.getUser(document.id())
-    Ok(views.html.index("Your new application is ready.", userName))
+    Ok(views.html.index("Your new application is ready.", user.userName))
   }
 
   def search = Action { implicit request =>

@@ -7,6 +7,7 @@
 <body background="@routes.Assets.at("images/background.jpg")">
     @form(action = routes.UserController.create) {
         <button class="us-flag" name="userName" value="us">userName</button>
+        <label>Username:@userName</label>
     }
     @form(action = routes.BaseController.selectCountry) {
         <button class="us-flag" name="country" value="us"><img src="@routes.Assets.at("images/us-flag.GIF")"/></button>
