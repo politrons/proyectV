@@ -1,6 +1,8 @@
 package model.user
 
-class User(var userName: String = "") {
+import persistance.Model
+
+class User(var userName: String = "") extends Model{
 
   /**
     * Rehydrate method for event sourcing

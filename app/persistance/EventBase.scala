@@ -1,10 +1,11 @@
-package events
+package persistance
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type
 import com.fasterxml.jackson.annotation.{JsonSubTypes, JsonTypeInfo}
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
+import events.UserCreated
 
 @JsonTypeInfo(
   use = JsonTypeInfo.Id.NAME,

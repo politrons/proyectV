@@ -3,10 +3,9 @@ package persistance
 import com.couchbase.client.java.document.JsonDocument
 import com.couchbase.client.java.document.json.JsonObject
 import com.couchbase.client.java.{AsyncBucket, CouchbaseAsyncCluster}
-import rx.Observable
 
 
-object CouchbaseDAO {
+class CouchbaseDAO extends PersistenceDAO {
 
   private var bucket: AsyncBucket = _
 
@@ -32,15 +31,15 @@ object CouchbaseDAO {
   /**
     * Receive a JsonDocument and insert into the bucket
     */
-  def insert(document: JsonDocument): Observable[JsonDocument] = {
-    bucket.insert(document)
+  def insert(document: JsonDocument): String = {
+    bucket.insert(document).toBlocking.first().id()
   }
 
   /**
     * Receive a JsonDocument and replace a previous document by this new one
     */
-  def replace(document: JsonDocument): Observable[JsonDocument] = {
-    bucket.replace(document)
+  def replace(document: JsonDocument)  {
+    bucket.replace(document).toBlocking.first()
   }
 
 
