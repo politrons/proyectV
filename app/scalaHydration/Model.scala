@@ -1,8 +1,6 @@
 package scalaHydration
 
-/**
-  * Created by pabloperezgarcia on 25/10/2016.
-  */
-class Model {
+
+trait Model {
 
 }

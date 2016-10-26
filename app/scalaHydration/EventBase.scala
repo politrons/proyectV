@@ -9,14 +9,11 @@ import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
   use = JsonTypeInfo.Id.CLASS,
   include = JsonTypeInfo.As.PROPERTY,
   property = "type")
-abstract class EventBase {
+trait EventBase {
 
   def encode: String = {
-
     val objectMapper = new ObjectMapper with ScalaObjectMapper
     objectMapper.registerModule(DefaultScalaModule)
-
-    val jsonResponse = objectMapper.writeValueAsString(this)
-    jsonResponse
+    objectMapper.writeValueAsString(this)
   }
 }

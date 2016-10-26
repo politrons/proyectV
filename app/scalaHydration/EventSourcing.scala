@@ -8,14 +8,16 @@ import com.couchbase.client.java.document.json.{JsonArray, JsonObject}
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 
+import scala.reflect._
 
-class EventSourcing {
+
+class EventSourcing[M <: Model : ClassTag] {
 
   private val mapper: ObjectMapper = new ObjectMapper
 
   val EVENTS: String = "events"
 
-  val eventMapping = collection.mutable.Map[Class[_ <: EventBase], (Model, EventBase) => Unit]()
+  val eventMapping = collection.mutable.Map[Class[_ <: EventBase], (Model, EventBase) => AnyVal]()
 
   var dao: PersistenceDAO = _
 
@@ -45,14 +47,15 @@ class EventSourcing {
   /**
     * Get the document from Couchbase and rehydrate the User from the events.
     */
-  def rehydrateModel(model: Model, documentId: String): Model = {
+  def rehydrateModel(documentId: String): M = {
+    val model = classTag[M].runtimeClass.newInstance.asInstanceOf[M]
     val document = dao.getDocument(documentId)
     rehydrate(model, document)
   }
 
   import scala.collection.JavaConversions._
 
-  private def rehydrate(model: Model, document: JsonObject): Model = {
+  private def rehydrate(model: M, document: JsonObject): M = {
     val array: JsonArray = document.getArray(EVENTS)
     array.toList.toList.foreach { entry =>
       val json = from(entry.asInstanceOf[java.util.HashMap[String, JsonObject]])
@@ -72,12 +75,12 @@ class EventSourcing {
     }
   }
 
-  private def applyEvent(model: Model, event: EventBase) {
+  private def applyEvent(model: M, event: EventBase) {
     eventMapping(event.getClass).apply(model, event)
   }
 
-  def setMapping[T <: EventBase, M <: Model](clazz: Class[T], fn: (M, T) => Unit) {
-    eventMapping += clazz -> fn.asInstanceOf[(Model, EventBase) => Unit]
+  def setMapping[E <: EventBase, M, Return](clazz: Class[E], fn: (M, E) => Return) {
+    eventMapping += clazz -> fn.asInstanceOf[(Model, EventBase) => AnyVal]
   }
 
 }
