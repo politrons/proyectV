@@ -27,6 +27,18 @@ class EventSourcing {
   }
 
   /**
+    *
+    * @param clazz className to be used as key
+    * @param fn funtion to be used in rehydrate
+    * @tparam E Event type to be used as generic
+    * @tparam M Model to be used as function argument
+    * @tparam Return Type to be used in function
+    */
+  def setMapping[E <: EventBase, M, Return](clazz: Class[E], fn: (M, E) => Return) {
+    eventMapping += clazz -> fn.asInstanceOf[(Model, EventBase) => AnyVal]
+  }
+
+  /**
     * This method will create the document where all events for that documentId.
     */
   def createDocument(documentId: String): String = {
@@ -77,10 +89,6 @@ class EventSourcing {
 
   private def applyEvent[M<:Model](model: M, event: EventBase) {
     eventMapping(event.getClass).apply(model, event)
-  }
-
-  def setMapping[E <: EventBase, M, Return](clazz: Class[E], fn: (M, E) => Return) {
-    eventMapping += clazz -> fn.asInstanceOf[(Model, EventBase) => AnyVal]
   }
 
 }
