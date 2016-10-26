@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import scala.reflect._
 
 
-class EventSourcing[M <: Model : ClassTag] {
+class EventSourcing {
 
   private val mapper: ObjectMapper = new ObjectMapper
 
@@ -47,7 +47,7 @@ class EventSourcing[M <: Model : ClassTag] {
   /**
     * Get the document from Couchbase and rehydrate the User from the events.
     */
-  def rehydrateModel(documentId: String): M = {
+  def getModel[M <: Model : ClassTag](documentId: String): M = {
     val model = classTag[M].runtimeClass.newInstance.asInstanceOf[M]
     val document = dao.getDocument(documentId)
     rehydrate(model, document)
@@ -55,7 +55,7 @@ class EventSourcing[M <: Model : ClassTag] {
 
   import scala.collection.JavaConversions._
 
-  private def rehydrate(model: M, document: JsonObject): M = {
+  private def rehydrate[M<:Model](model: M, document: JsonObject): M = {
     val array: JsonArray = document.getArray(EVENTS)
     array.toList.toList.foreach { entry =>
       val json = from(entry.asInstanceOf[java.util.HashMap[String, JsonObject]])
@@ -75,7 +75,7 @@ class EventSourcing[M <: Model : ClassTag] {
     }
   }
 
-  private def applyEvent(model: M, event: EventBase) {
+  private def applyEvent[M<:Model](model: M, event: EventBase) {
     eventMapping(event.getClass).apply(model, event)
   }
 

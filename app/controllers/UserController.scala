@@ -13,7 +13,7 @@ import scalaHydration.EventSourcing
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {
 
-  val eventSourcing= new EventSourcing[User]()
+  val eventSourcing= new EventSourcing()
   eventSourcing.initialize(new CouchbaseDAO())
   eventSourcing.setMapping[UserCreated, User, Unit](classOf[UserCreated],
     (user, evt) => user.loadUserName(evt.userName, evt.password))
@@ -24,7 +24,7 @@ class UserController @Inject()(cache: CacheApi) extends BaseController {
       val documentId: String = eventSourcing.createDocument(userName.get)
       val event = new UserCreated(documentId, "")
       eventSourcing.appendEvent(documentId, event)
-      val user:User = eventSourcing.rehydrateModel(documentId)
+      val user:User = eventSourcing.getModel[User](documentId)
       Ok(views.html.index("Your new application is ready.", user))
     }else{
       Ok(views.html.index("Your new application is ready."))
