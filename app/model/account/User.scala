@@ -2,6 +2,7 @@ package model.account
 
 import scalaHydration.Model
 
+
 case class User(var userName: String = "",
                 var password: String = "") extends Model {
 

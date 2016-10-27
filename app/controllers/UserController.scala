@@ -7,26 +7,24 @@ import model.account.User
 import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
-
-import scalaHydration.EventSourcing
-
+import scalaHydration.EventSourcing.model
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {
 
-  val eventSourcing= new EventSourcing()
-  eventSourcing.initialize(new CouchbaseDAO())
-  eventSourcing.setMapping[UserCreated, User, Unit](classOf[UserCreated],
+  var user = new User()
+  user.initialize(new CouchbaseDAO())
+  user.setMapping[UserCreated, User, Unit](classOf[UserCreated],
     (user, evt) => user.loadUserName(evt.userName, evt.password))
 
   def create = Action { implicit request =>
     val userName = request.getQueryString("userName")
     if (userName.isDefined) {
-      val documentId: String = eventSourcing.createDocument(userName.get)
+      val documentId: String = user.createDocument(userName.get)
       val event = new UserCreated(documentId, "")
-      eventSourcing.appendEvent(documentId, event)
-      val user:User = eventSourcing.getModel[User](documentId)
+      user.appendEvent(documentId, event)
+      user.rehydrate(documentId)
       Ok(views.html.index("Your new application is ready.", user))
-    }else{
+    } else {
       Ok(views.html.index("Your new application is ready."))
     }
 

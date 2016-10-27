@@ -2,11 +2,11 @@ package events
 
 import com.fasterxml.jackson.annotation.{JsonCreator, JsonProperty}
 
-import scalaHydration.EventBase
+import scalaHydration.Event
 
 
 class UserCreated @JsonCreator() (@JsonProperty("userName")var userName: String,
-                                  @JsonProperty("password")var password: String) extends EventBase{
+                                  @JsonProperty("password")var password: String) extends Event{
 
 
   @JsonProperty("userName") def getUserName: String = {
