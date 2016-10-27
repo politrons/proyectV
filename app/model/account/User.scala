@@ -1,6 +1,6 @@
 package model.account
 
-import scalaHydration.Model
+import scaladration.Model
 
 
 case class User(var userName: String = "",

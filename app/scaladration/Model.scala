@@ -1,4 +1,4 @@
-package scalaHydration
+package scaladration
 
 
 trait Model {

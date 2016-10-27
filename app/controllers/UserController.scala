@@ -7,12 +7,12 @@ import model.account.User
 import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
-import scalaHydration.EventSourcing.model
+
+import scaladration.PersistenceModel._
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {
 
-  var user = new User()
-  user.initialize(new CouchbaseDAO())
+  val user = initialize[User](new CouchbaseDAO())
   user.setMapping[UserCreated, User, Unit](classOf[UserCreated],
     (user, evt) => user.loadUserName(evt.userName, evt.password))
 
@@ -27,16 +27,16 @@ class UserController @Inject()(cache: CacheApi) extends BaseController {
     } else {
       Ok(views.html.index("Your new application is ready."))
     }
-
   }
 
   def search = Action { implicit request =>
-    var fromRequest = request.getQueryString("username")
-    if (fromRequest.isEmpty) {
-      fromRequest = Option("0")
+    val userName = request.getQueryString("userName")
+    if (userName.isDefined) {
+      user.rehydrate(userName.get)
+      Ok(views.html.index("Your new application is ready.", user))
+    } else {
+      Ok(views.html.index("Your new application is ready."))
     }
-    val userName = null
-    Ok(views.html.index("Your new application is ready.", userName))
 
   }
 

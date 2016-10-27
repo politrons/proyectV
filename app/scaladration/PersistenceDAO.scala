@@ -1,4 +1,4 @@
-package scalaHydration
+package scaladration
 
 import com.couchbase.client.java.document.JsonDocument
 import com.couchbase.client.java.document.json.JsonObject

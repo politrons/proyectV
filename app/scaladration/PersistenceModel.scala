@@ -1,4 +1,4 @@
-package scalaHydration
+package scaladration
 
 import java.io.IOException
 
@@ -8,19 +8,22 @@ import com.couchbase.client.java.document.json.{JsonArray, JsonObject}
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 
-object EventSourcing {
+import scala.reflect._
+
+object PersistenceModel {
 
   private val EVENTS: String = "events"
   private val mapper: ObjectMapper = new ObjectMapper
   private val eventMapping = collection.mutable.Map[Class[_ <: Event], (Model, Event) => AnyVal]()
 
-  implicit class model(model: Model) {
+  def initialize[M <: Model : ClassTag](persistenceDAO: PersistenceDAO): M = {
+    val model = classTag[M].runtimeClass.newInstance.asInstanceOf[M]
+    persistenceDAO.init()
+    model.setPersistence(persistenceDAO)
+    model
+  }
 
-    def initialize(persistenceDAO: PersistenceDAO):Model={
-      persistenceDAO.init()
-      model.setPersistence(persistenceDAO)
-      model
-    }
+  implicit class model(model: Model) {
 
     /**
       *
