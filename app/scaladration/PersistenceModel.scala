@@ -13,7 +13,7 @@ object PersistenceModel {
 
   private val EVENTS: String = "events"
   private val mapper: ObjectMapper = new ObjectMapper
-  private val eventMapping = collection.mutable.Map[Class[_ <: Event], (Model, Event) => AnyVal]()
+  private val eventMapping = collection.mutable.Map[Class[_ <: Event], (Model, Event) => Unit]()
 
   def initialize[M <: Model : ClassTag](persistenceDAO: PersistenceDAO): M = {
     val model = classTag[M].runtimeClass.newInstance.asInstanceOf[M]
@@ -25,19 +25,7 @@ object PersistenceModel {
   implicit class model(model: Model) {
 
     /**
-      *
-      * @param clazz className to be used as key
-      * @param fn    funtion to be used in rehydrate
-      * @tparam E      Event type to be used as generic
-      * @tparam M      Model to be used as function argument
-      * @tparam Return Type to be used in function
-      */
-    def setMapping[E <: Event, M <: Model, Return](clazz: Class[E], fn: (M, E) => Return) {
-      eventMapping += clazz -> fn.asInstanceOf[(Model, Event) => AnyVal]
-    }
-
-    /**
-      * This method will create the document where all events for that documentId.
+      * This method will create the document where all events for that documentId will be appended.
       */
     def createDocument(documentId: String): String = {
       val userDocument: JsonObject = create.put(EVENTS, JsonArray.create)
@@ -45,9 +33,10 @@ object PersistenceModel {
     }
 
     /**
-      * This method will append event in the previous document created.
+      * This method will append events in the document created.
       */
-    def appendEvent(documentId: String, event: Event) {
+    def appendEvent[E <: Event](documentId: String, event: Event,clazz: Class[E], fn: (Model, E) => Unit) {
+      setMapping(clazz, fn)
       val document = model.dao.getDocument(documentId)
       val jsonDocument = JsonObject.fromJson(document)
       jsonDocument.getArray(EVENTS).add(fromJson(event.encode))
@@ -55,7 +44,7 @@ object PersistenceModel {
     }
 
     /**
-      * Get the document from Couchbase and rehydrate the User from the events.
+      * Get the document from persistence layer and rehydrate the Model from the events.
       */
     def rehydrate(documentId: String) = {
       val document = model.dao.getDocument(documentId)
@@ -83,6 +72,16 @@ object PersistenceModel {
         case e: IOException =>
           throw new IllegalArgumentException("Exception parsing JSON: " + event, e)
       }
+    }
+
+    /**
+      *
+      * @param clazz className to be used as key
+      * @param fn    function to be used in rehydrate
+      * @tparam E      Event type to be used as generic
+      */
+    private def setMapping[E <: Event](clazz: Class[E], fn: (Model, E) => Unit) {
+      eventMapping += clazz -> fn.asInstanceOf[(Model, Event) => Unit]
     }
 
     private def applyEvent(model: Model, event: Event) {
