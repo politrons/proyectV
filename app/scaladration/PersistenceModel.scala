@@ -2,8 +2,7 @@ package scaladration
 
 import java.io.IOException
 
-import com.couchbase.client.java.document.JsonDocument
-import com.couchbase.client.java.document.json.JsonObject.{create, from, _}
+import com.couchbase.client.java.document.json.JsonObject.{from, _}
 import com.couchbase.client.java.document.json.{JsonArray, JsonObject}
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -41,9 +40,8 @@ object PersistenceModel {
       * This method will create the document where all events for that documentId.
       */
     def createDocument(documentId: String): String = {
-      val emptyDocument: JsonObject = create.put(EVENTS, JsonArray.create)
-      val userDocument: JsonDocument = JsonDocument.create(documentId, emptyDocument)
-      model.dao.insert(userDocument)
+      val userDocument: JsonObject = create.put(EVENTS, JsonArray.create)
+      model.dao.insert(documentId, userDocument.toString)
     }
 
     /**
@@ -51,8 +49,9 @@ object PersistenceModel {
       */
     def appendEvent(documentId: String, event: Event) {
       val document = model.dao.getDocument(documentId)
-      document.getArray(EVENTS).add(fromJson(event.encode))
-      model.dao.replace(JsonDocument.create(documentId, document))
+      val jsonDocument = JsonObject.fromJson(document)
+      jsonDocument.getArray(EVENTS).add(fromJson(event.encode))
+      model.dao.replace(documentId, jsonDocument.toString)
     }
 
     /**
@@ -60,7 +59,8 @@ object PersistenceModel {
       */
     def rehydrate(documentId: String) = {
       val document = model.dao.getDocument(documentId)
-      deserialiseEvents(model, document)
+      val jsonDocument = JsonObject.fromJson(document)
+      deserialiseEvents(model, jsonDocument)
     }
 
     import scala.collection.JavaConversions._

@@ -25,25 +25,30 @@ class CouchbaseDAO extends PersistenceDAO {
   /**
     * Find the Document by Id and map it into JsonObject
     */
-  def getDocument(documentId: String): JsonObject = {
-    val loaded = bucket.get(documentId).toBlocking.first()
-    loaded.content()
+  def getDocument(documentId: String): String = {
+    val document = bucket.get(documentId).toBlocking.first()
+    document.content().toString
   }
 
   /**
     * Receive a JsonDocument and insert into the bucket
     */
-  def insert(document: JsonDocument): String = {
-    bucket.insert(document).toBlocking.first().id()
+  def insert(documentId: String, document: String): String = {
+    val couchbaseDocument = createDocument(documentId, document)
+    bucket.insert(couchbaseDocument).toBlocking.first().id()
   }
 
   /**
     * Receive a JsonDocument and replace a previous document by this new one
     */
-  def replace(document: JsonDocument)  {
-    bucket.replace(document).toBlocking.first()
+  def replace(documentId: String, document: String) {
+    val couchbaseDocument = createDocument(documentId, document)
+    bucket.replace(couchbaseDocument).toBlocking.first()
   }
 
+  private def createDocument(documentId: String, document: String): JsonDocument = {
+    JsonDocument.create(documentId, JsonObject.fromJson(document))
+  }
 
   private def setBucket(bucket: AsyncBucket) {
     this.bucket = bucket
