@@ -8,6 +8,7 @@ import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
 
+import scaladration.Model
 import scaladration.PersistenceModel._
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {
@@ -20,14 +21,16 @@ class UserController @Inject()(cache: CacheApi) extends BaseController {
       val documentId: String = user.createDocument(userName.get)
       val event = new UserCreated(documentId, "")
 
-      user.appendEvent[UserCreated](documentId, event,classOf[UserCreated],
-        (model, evt) => user.loadUserName(evt.userName, evt.password)
-      )
+      user.appendEvent[UserCreated](documentId, event, classOf[UserCreated], getCreateUserAction)
       user.rehydrate(documentId)
       Ok(views.html.index("Your new application is ready.", user))
     } else {
       Ok(views.html.index("Your new application is ready."))
     }
+  }
+
+  def getCreateUserAction: (Model, UserCreated) => Unit = {
+    (model, evt) => user.loadUserName(evt.userName, evt.password)
   }
 
   def search = Action { implicit request =>

@@ -35,12 +35,12 @@ object PersistenceModel {
     /**
       * This method will append events in the document created.
       */
-    def appendEvent[E <: Event](documentId: String, event: Event,clazz: Class[E], fn: (Model, E) => Unit) {
-      setMapping(clazz, fn)
+    def appendEvent[E <: Event](documentId: String, event: Event, clazz: Class[E], action: (Model, E) => Unit) {
       val document = model.dao.getDocument(documentId)
       val jsonDocument = JsonObject.fromJson(document)
       jsonDocument.getArray(EVENTS).add(fromJson(event.encode))
       model.dao.replace(documentId, jsonDocument.toString)
+      setMapping(clazz, action)
     }
 
     /**
