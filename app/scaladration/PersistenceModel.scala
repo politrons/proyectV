@@ -26,6 +26,8 @@ object PersistenceModel {
 
     /**
       * This method will create the document where all events for that documentId will be appended.
+      * @param documentId for the new document
+      * @return
       */
     def createDocument(documentId: String): String = {
       val userDocument: JsonObject = create.put(EVENTS, JsonArray.create)
@@ -33,7 +35,12 @@ object PersistenceModel {
     }
 
     /**
-      * This method will append events in the document created.
+      *  This method will append events in the document created.
+      * @param documentId if of the document
+      * @param event instance for rehydrate of the model
+      * @param clazz event for key of the function mapping
+      * @param action function to apply over the model during rehydrate
+      * @tparam E
       */
     def appendEvent[E <: Event](documentId: String, event: Event, clazz: Class[E], action: (Model, E) => Unit) {
       val document = model.dao.getDocument(documentId)
@@ -45,6 +52,8 @@ object PersistenceModel {
 
     /**
       * Get the document from persistence layer and rehydrate the Model from the events.
+      * @param documentId to get the document for rehydrate the model
+      * @return
       */
     def rehydrate(documentId: String) = {
       val document = model.dao.getDocument(documentId)
