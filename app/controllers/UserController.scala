@@ -3,17 +3,19 @@ package controllers
 import javax.inject.Inject
 
 import events.UserCreated
-import model.account.User
+import _root_.model.account.User
 import persistance.CouchbaseDAO
 import play.api.cache._
 import play.api.mvc._
+import politrons.scalaydrated.{Model, PersistenceModel}
+import politrons.scalaydrated.PersistenceModel._
 
-import scaladration.Model
-import scaladration.PersistenceModel._
+
+
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {
 
-  val user = initialize[User](new CouchbaseDAO())
+  val user = PersistenceModel.initialize[User](new CouchbaseDAO())
 
   def create = Action { implicit request =>
     val userName = request.getQueryString("userName")

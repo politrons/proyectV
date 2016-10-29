@@ -1,9 +1,7 @@
 package events
 
 import com.fasterxml.jackson.annotation.{JsonCreator, JsonProperty}
-
-import scaladration.Event
-
+import politrons.scalaydrated.Event
 
 class UserCreated @JsonCreator() (@JsonProperty("userName")var userName: String,
                                   @JsonProperty("password")var password: String) extends Event{

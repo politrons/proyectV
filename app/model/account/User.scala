@@ -1,6 +1,6 @@
 package model.account
 
-import scaladration.Model
+import politrons.scalaydrated.Model
 
 
 case class User(var userName: String = "",
