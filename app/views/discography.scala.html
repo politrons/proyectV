@@ -1,5 +1,5 @@
-@import model.apple.music.Album
 @import views.html.helper.form
+@import politrons.apple.search.model.music.Album
 @(albums: List[Album])
 @main("Welcome to Project Video","/") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("/css/general.css")">
@@ -12,17 +12,17 @@
             <table class="mainTable">
                 <tr>
                     <td>
-                        <img class="image" src='@album.asInstanceOf[Album].artWorkUrl'>
+                        <img class="image" src='@album.getArtworkUrl100'>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Artis:@album.artistName</label>
+                        <label>Artis:@album.getArtistName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Album:@album.collectionName</label>
+                        <label>Album:@album.getCollectionName</label>
                     </td>
                 </tr>
                 <tr>
@@ -32,41 +32,41 @@
                             @for((song, index) <- album.asInstanceOf[Album].songs.zipWithIndex) {
                                 <tr>
                                     <td class="td_song">
-                                        <label>@song.trackName</label>
+                                        <label>@song.getTrackName</label>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <audio controls preload="none" class="song">
-                                            <source src='@song.previewUrl' type="audio/mp4" />
-                                        </audio>
-                                    </td>
-                                    <td>
-                                        <label class="price">Price:@song.trackPrice</label>
-                                    </td>
-                                    <td>
-                                        <a class="buy_itunes" href="@song.trackViewUrl" class="button">Buy</a>
-                                    </td>
-                                    @if(song.videoClip != null) {
-                                        <td>
-                                            <video controls="" class="video">
-                                                <source src="@song.videoClip.previewUrl" type="video/mp4"/>
-                                            </video>
-                                        </td>
-                                    }
-                                </tr>
+                                @*<tr>*@
+                                    @*<td>*@
+                                        @*<audio controls preload="none" class="song">*@
+                                            @*<source src='@song.previewUrl' type="audio/mp4" />*@
+                                        @*</audio>*@
+                                    @*</td>*@
+                                    @*<td>*@
+                                        @*<label class="price">Price:@song.trackPrice</label>*@
+                                    @*</td>*@
+                                    @*<td>*@
+                                        @*<a class="buy_itunes" href="@song.trackViewUrl" class="button">Buy</a>*@
+                                    @*</td>*@
+                                    @*@if(song.videoClip != null) {*@
+                                        @*<td>*@
+                                            @*<video controls="" class="video">*@
+                                                @*<source src="@song.videoClip.previewUrl" type="video/mp4"/>*@
+                                            @*</video>*@
+                                        @*</td>*@
+                                    @*}*@
+                                @*</tr>*@
                             }
                         </table>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Genre:@album.primaryGenreName</label>
+                        <label>Genre:@album.getPrimaryGenreName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Country:@album.country</label>
+                        <label>Country:@album.getCountry</label>
                     </td>
                 </tr>
                 <tr>

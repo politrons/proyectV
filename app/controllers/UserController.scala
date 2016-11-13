@@ -3,14 +3,12 @@ package controllers
 import javax.inject.Inject
 
 import events.UserCreated
-import _root_.model.account.User
+import model.account.User
 import persistance.CouchbaseDAO
 import play.api.cache._
-import play.api.mvc._
+import play.api.mvc.Action
+import politrons.scalaydrated.PersistenceModel.model
 import politrons.scalaydrated.{Model, PersistenceModel}
-import politrons.scalaydrated.PersistenceModel._
-
-
 
 
 class UserController @Inject()(cache: CacheApi) extends BaseController {

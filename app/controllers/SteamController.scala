@@ -3,14 +3,8 @@ package controllers
 import javax.inject.Inject
 
 import exceptions.HttpResponseException
-import http.HttpClient._
-import implicits.Utils.cacheUtils
-import model.steam.{GameId, SteamStore}
 import play.api.cache._
-import play.api.mvc._
-import views.html
 
-import scala.concurrent.duration._
 import scala.util.parsing.json._
 import scalaj.http.{HttpRequest, HttpResponse}
 
@@ -25,34 +19,34 @@ class SteamController @Inject()(cache: CacheApi) extends BaseController {
 
 //  loadGameIds()
 
-  def games = Action { implicit request =>
-    var fromRequest = request.getQueryString("from")
-    if (fromRequest.isEmpty) {
-      fromRequest = Option("0")
-    }
-    val from = Integer.parseInt(fromRequest.get) * 20
-    loadGameIds()
-    Ok(html.games(getGamesIds(from, from + 20), cache.jsonArraySize(GAME_KEY) / 10))
-  }
-
-  private def getGamesIds(from: Int, to: Int): List[GameId] = {
-    SteamStore.gamesIds(cache.getVal[JSONArray](GAME_KEY), from, to)
-  }
-
-  private def loadGameIds(): Unit = {
-    val games = cache.get(GAME_KEY)
-    if (games.isEmpty) {
-      get(s"$GAME_IDS_LIST_API", asJsonGamesId)
-      cache.set(GAME_KEY, lastResponse.get, 60.minutes)
-    }
-  }
-
-  def gameDetails = Action { implicit request =>
-    val gameId = request.getQueryString("gameId")
-    get(s"$GAME_API${gameId.get}&maxlength=300&format=json", asJsonGame)
-    val game = SteamStore.game(gameId.get, lastResponse.get)
-    Ok(html.gameDetail(game))
-  }
+//  def games = Action { implicit request =>
+//    var fromRequest = request.getQueryString("from")
+//    if (fromRequest.isEmpty) {
+//      fromRequest = Option("0")
+//    }
+//    val from = Integer.parseInt(fromRequest.get) * 20
+//    loadGameIds()
+//    Ok(html.games(getGamesIds(from, from + 20), cache.jsonArraySize(GAME_KEY) / 10))
+//  }
+//
+//  private def getGamesIds(from: Int, to: Int): List[GameId] = {
+//    SteamStore.gamesIds(cache.getVal[JSONArray](GAME_KEY), from, to)
+//  }
+//
+//  private def loadGameIds(): Unit = {
+//    val games = cache.get(GAME_KEY)
+//    if (games.isEmpty) {
+//      get(s"$GAME_IDS_LIST_API", asJsonGamesId)
+//      cache.set(GAME_KEY, lastResponse.get, 60.minutes)
+//    }
+//  }
+//
+//  def gameDetails = Action { implicit request =>
+//    val gameId = request.getQueryString("gameId")
+//    get(s"$GAME_API${gameId.get}&maxlength=300&format=json", asJsonGame)
+//    val game = SteamStore.game(gameId.get, lastResponse.get)
+//    Ok(html.gameDetail(game))
+//  }
 
   //  def findHardware(): { implicit request =>
 

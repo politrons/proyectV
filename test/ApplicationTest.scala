@@ -1,7 +1,7 @@
-import factories.ApplicationFactory
+import appleSearch.factory.ApplicationFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.AppleStoreMock
-import model.apple.app.AppleStore
+import appleSearch.model.app.AppleStore
 import org.junit.Test
 
 /**

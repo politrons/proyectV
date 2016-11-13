@@ -1,4 +1,4 @@
-@import model.apple.app.Application
+@import appleSearch.model.app.Application
 @import views.html.helper.form
 @(apps: List[Application])
 @main("Welcome to Project Video","/") {
@@ -12,32 +12,32 @@
             <table class="mainTable">
                 <tr>
                     <td>
-                        <img class="image" src='@app.artworkUrl'>
+                        <img class="image" src='@app.getArtworkUrl100'>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Company:@app.artistName</label>
+                        <label>Company:@app.getArtistName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Application:@app.trackName</label>
+                        <label>Application:@app.getTrackName</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="@app.trackViewUrl" class="button">Buy</a>
+                        <a href="@app.getTrackViewUrl" class="button">Buy</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a href="@app.artistViewUrl" class="button">More games</a>
+                        <a href="@app.getArtistViewUrl" class="button">More games</a>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Price:@app.price</label>
+                        <label>Price:@app.getPrice</label>
                     </td>
                 </tr>
             </table>

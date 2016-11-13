@@ -8,8 +8,8 @@ GET        /selectCountry        controllers.BaseController.selectCountry
 GET        /discography          controllers.AppleController.discography
 GET        /application          controllers.AppleController.application
 GET        /movie                controllers.AppleController.movie
-GET        /games                controllers.SteamController.games
-GET        /gameDetails          controllers.SteamController.gameDetails
+#GET        /games                controllers.SteamController.games
+#GET        /gameDetails          controllers.SteamController.gameDetails
 GET        /create               controllers.UserController.create
 
 # Map static resources from the /public folder to the /assets URL path

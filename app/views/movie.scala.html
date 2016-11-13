@@ -1,4 +1,4 @@
-@import model.apple.movie.Movie
+@import appleSearch.model.movie.Movie
 @import views.html.helper.form
 @(movies: List[Movie])
 @main("Welcome to Project Video","/") {
@@ -12,44 +12,44 @@
                 <table class="mainTable">
                     <tr>
                         <td>
-                            <img class="image" src='@movie.artworkUrl'>
+                            <img class="image" src='@movie.getArtworkUrl100'>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Company:@movie.artistName</label>
+                            <label>Company:@movie.getArtistName</label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Title:@movie.trackName</label>
+                            <label>Title:@movie.getTrackName</label>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <video controls="" class="video">
-                                <source src="@movie.previewUrl" type="video/mp4"/>
+                                <source src="@movie.getPreviewUrl" type="video/mp4"/>
                             </video>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Rent:@movie.trackRentalPrice</label>
+                            <label>Rent:@movie.getTrackRentalPrice</label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>SD:@movie.trackPrice</label>
+                            <label>SD:@movie.getTrackPrice</label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>HD:@movie.collectionHdPrice</label>
+                            <label>HD:@movie.getCollectionHdPrice</label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label>Genre:@movie.primaryGenreName</label>
+                            <label>Genre:@movie.getPrimaryGenreName</label>
                         </td>
                     </tr>
                 </table>

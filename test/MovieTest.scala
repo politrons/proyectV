@@ -1,7 +1,7 @@
-import factories.MovieFactory
+import appleSearch.factory.MovieFactory
 import implicits.Utils.jsonArrayUtils
 import mocks.AppleTvMock
-import model.apple.app.AppleStore
+import appleSearch.model.app.AppleStore
 import org.junit.Test
 
 /**

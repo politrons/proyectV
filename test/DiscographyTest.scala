@@ -1,5 +1,5 @@
 import mocks.ItunesMock
-import model.apple.music.Discography
+import appleSearch.model.music.DiscographyF
 import org.junit.Test
 
 
@@ -11,16 +11,16 @@ class DiscographyTest {
 
   @Test def createDiscography(): Unit = {
     val jsonArray = ItunesMock.mockMusic()
-    val albums = Discography.albums(jsonArray)
+    val albums = DiscographyF.albums(jsonArray)
     assert(albums.size == 49)
     assert(albums.head.songs.size == 1)
   }
 
   @Test def createDiscographyWithVideos(): Unit = {
     val arrayMusic = ItunesMock.mockMusic()
-    val albums = Discography.albums(arrayMusic)
+    val albums = DiscographyF.albums(arrayMusic)
     val arrayVideo = ItunesMock.mockVideos()
-    Discography.attachVideos(arrayVideo, albums)
+    DiscographyF.attachVideos(arrayVideo, albums)
     assert(albums.head.songs.last.videoClip != null)
   }
 

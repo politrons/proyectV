@@ -4,7 +4,7 @@ import politrons.scalaydrated.Model
 
 
 case class User(var userName: String = "",
-                var password: String = "") extends Model {
+                var password: String = "") extends Model{
 
   def this() {
     this("")
